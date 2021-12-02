@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Eleanor">
+    <title>Unit C4 Lesson 6: Iteration</title>
+    <style>
+      input {
+        width: 50px;
+      }
+      #buttons {
+        margin-top: 5px;
+        display: flex;
+        flex-direction: column;
+        width: 150px;
+      }
+      #buttons button {
+        margin: 2px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Unit C4 Lesson 6: Iteration</h1>
+    <!--Outputs-->
+    <ul id="valOutput"></ul>
+    <ul id="multOutput"></ul>
+    <ul id="divOutput"></ul>
+    <!--Input fields-->
+    <div id="inputFields">
+      <input type="number" id="num1">
+      <input type="number" id="num2">
+      <input type="number" id="num3">
+      <input type="number" id="num4">
+    </div>
+    <!--Buttons-->
+    <div id = "buttons">
+      <button onclick="addValues()">Submit</button>
+      <button onclick="valArray.sort(function(a, b){return a-b}); printList ('valOutput', valArray)">Sort Ascending</button>
+      <button onclick="valArray.sort(function(a, b){return b-a}); printList ('valOutput', valArray)">Sort Descending</button>
+      <button onclick="multValues()">Find Products</button>
+      <button onclick="divValues()">Find Quotients</button>
+    </div>
+    <!--JS-->
+    <script>
+      //creates arrays when doc is loaded
+      const valArray = [];
+      const multNumbers = [];
+      const divNumbers = [];
+      //clears ul, then adds li for each item in array (note: output must be in quotes)
+      function printList(output, arrayName) {
+        document.getElementById(output).innerHTML = "";
+        for (i in arrayName) {
+          const listItem = document.createElement("li");
+          const node = document.createTextNode(arrayName[i]);
+          listItem.appendChild(node);
+          const element = document.getElementById(output);
+          element.appendChild(listItem);
+        }
+      }
+      //adds values to myArray and clears input fields
+      function addValues() {
+        addItem(Number(document.getElementById("num1").value));
+        addItem(Number(document.getElementById("num2").value));
+        addItem(Number(document.getElementById("num3").value));
+        addItem(Number(document.getElementById("num4").value));
+        document.getElementById("num1").value = "";
+        document.getElementById("num2").value = "";
+        document.getElementById("num3").value = "";
+        document.getElementById("num4").value = "";
+        printList ("valOutput", valArray);
+      }
+      //checks if field is blank. if false, adds to myArray
+      function addItem(addedValue) {
+        if (addedValue != "") {
+          valArray.push(addedValue);
+        }
+      }
+      //multiplies for every value in array
+      function multValues() {
+        for (var i = 0; i < valArray.length; i++) {
+          value1 = Number(valArray[i]);
+          nextNum = i+1;
+          if (nextNum < valArray.length) {
+            value2 = Number(valArray[nextNum]);
+          } else {
+            value2 = Number(valArray[0]);
+          }
+          product = value1 * value2;
+          output = value1 + "*" + value2 + " = " + product;
+          multNumbers.push(output);
+          printList("multOutput", multNumbers);
+        }
+      }
+      //divides for every value in array
+      function divValues() {
+        i = 0;
+        while (i < valArray.length) {
+          value1 = Number(valArray[i]);
+          nextNum = i + 1;
+          if (nextNum < valArray.length) {
+            value2 = Number(valArray[nextNum]);
+          } else {
+            value2 = Number(valArray[0]);
+          }
+          quotient = value1 / value2;
+          output = value1 + "/" + value2 + " = " + quotient;
+          divNumbers.push(output);
+          i++;
+        }
+        printList("divOutput", divNumbers);
+      }
+      //clears array
+      function clearArray(arrayName) {
+        arrayName.length = 0;
+      }
+    </script>
+
+  </body>
+</html>

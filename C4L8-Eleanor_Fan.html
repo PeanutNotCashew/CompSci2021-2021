@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Eleanor">
+    <title>Unit C4 Lesson 8: Styles</title>
+    <style media="screen">
+      #boxes {
+        display: flex;
+      }
+      .containers {
+        margin: 2px;
+      }
+      #inputs {
+        display: flex;
+        flex-direction: column;
+        width: 150px;
+      }
+      #errors {
+        display: none;
+      }
+    </style>
+    <script>
+      function changeDiv(divID) {
+        var color = document.getElementById("colorPicker").value;
+        var height = document.getElementById("height").value + "px";
+        var width = document.getElementById("width").value + "px";
+        if (height == 0 || width == 0) {
+          document.getElementById("errors").style.display = "block";
+        }
+        else {
+          document.getElementById("errors").style.display = "none";
+          document.getElementById(divID).style.backgroundColor = color;
+          document.getElementById(divID).style.height = height;
+          document.getElementById(divID).style.width = width;
+        }
+      }
+      function getBoxInfo(divID) {
+        var color = document.getElementById(divID).style.backgroundColor;
+        var height = document.getElementById(divID).style.height;
+        var width = document.getElementById(divID).style.width
+        document.getElementById("boxInfo").innerText = "Color: " + color + "; Height: " + height + "; Width: " + width;
+      }
+    </script>
+  </head>
+
+  <body>
+    <h1>Unit C4 Lesson 8: Styles</h1>
+    <div id="boxes">
+      <!--Note: getting box info only works with inline-->
+      <div class="containers" id="div1" style="background-color: darkSeaGreen; height: 100px; width: 500px"></div>
+      <div class="containers" id="div2" style="background-color: plum; height: 150px; width: 250px;"></div>
+    </div>
+    <div id="inputs">
+      <input type="color" id="colorPicker">
+      <input type="number" id="height" placeholder="Height (px)">
+      <input type="number" id="width" placeholder="Width (px)">
+      <button onclick="changeDiv('div1')">Apply to Box 1</button>
+      <button onclick="changeDiv('div2')">Apply to Box 2</button>
+      <button onclick="getBoxInfo('div1')">Get Box 1 Info</button>
+      <button onclick="getBoxInfo('div2')">Get Box 2 Info</button>
+    </div>
+    <p id="boxInfo"></p>
+    <p id="errors">Error: User input equals zero</p>
+  </body>
+</html>

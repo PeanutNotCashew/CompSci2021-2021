@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Eleanor">
+    <meta name="viewport" content="width=device-width">
+    <title>Unit C4 Lesson 4</title>
+
+    <script type="text/javascript">
+      function add(x, y) {
+        return x + y;
+      }
+      function subtract (x, y) {
+        return x - y;
+      }
+      function multiply(x, y) {
+        return x * y;
+      }
+      function divide(x, y) {
+        return x / y;
+      }
+      function hypotenuse(x, y) {
+        return Math.sqrt(x*x + y*y);
+      }
+      function doMath () {
+        var term1 = Number(document.getElementById("term1").value);
+        var operator = document.getElementById("operation").value;
+        var term2 = Number(document.getElementById("term2").value);
+        if (operator === "+") {
+          document.getElementById('solution').innerHTML = add(term1, term2);
+        }
+        if (operator === '-') {
+          document.getElementById('solution').innerHTML = subtract(term1, term2);
+        }
+        if (operator === '*') {
+          document.getElementById('solution').innerHTML =  multiply(term1, term2);
+        }
+        if (operator === '/') {
+          document.getElementById('solution').innerHTML =  divide(term1, term2);
+        }
+        if (operator === 'hypotenuse') {
+          document.getElementById('solution').innerHTML =  hypotenuse(term1, term2);
+        }
+      }
+    </script>
+    <style>
+      #solution {
+        margin-left: 10px;
+        display: inline;
+      }
+      input {
+        width: 80px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Unit C4 Lesson 4</h1>
+    <input type="number" id="term1" name="term1" placeholder="Number">
+    <select id="operation" name="operation" size="1">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">x</option>
+      <option value="/">/</option>
+      <option value="hypotenuse">h</option>
+    </select>
+    <input type="number" id="term2" name="term2" placeholder="Number">
+    <button onclick="doMath()">=</button>
+    <p id="solution"></p>
+  </body>
+</html>

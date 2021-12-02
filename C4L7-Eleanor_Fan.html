@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Eleanor">
+    <title>Unit C4 Lesson 7: Conditional Statements</title>
+    <style>
+      input {
+        width: 50px;
+      }
+      #buttons {
+        margin-top: 5px;
+        display: flex;
+        flex-direction: column;
+        width: 150px;
+      }
+      #buttons button {
+        margin: 2px;
+      }
+      #error p{
+        color: red;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Unit C4 Lesson 7: Conditional Statements</h1>
+    <!--Outputs-->
+    <ul id="valOutput"></ul>
+    <ul id="multOutput"></ul>
+    <ul id="divOutput"></ul>
+    <div id="error"></div>
+    <!--Input fields-->
+    <div id="inputFields">
+      <input type="number" class="inputValue">
+      <input type="number" class="inputValue">
+      <input type="number" class="inputValue">
+      <input type="number" class="inputValue">
+    </div>
+    <!--Buttons-->
+    <div id = "buttons">
+      <button onclick="addValues()">Submit</button>
+      <button onclick="valArray.sort(function(a, b){return a-b}); printList ('valOutput', valArray)">Sort Ascending</button>
+      <button onclick="valArray.sort(function(a, b){return b-a}); printList ('valOutput', valArray)">Sort Descending</button>
+      <button onclick="multValues()">Find Products</button>
+      <button onclick="divValues()">Find Quotients</button>
+    </div>
+    <!--JS-->
+    <script>
+      //creates arrays when doc is loaded
+      const valArray = [];
+      const multNumbers = [];
+      const divNumbers = [];
+      //clears ul, then adds li for each item in array (note: output must be in quotes)
+      function printList(output, arrayName) {
+        document.getElementById(output).innerHTML = "";
+        for (i in arrayName) {
+          const listItem = document.createElement("li");
+          const node = document.createTextNode(arrayName[i]);
+          listItem.appendChild(node);
+          const element = document.getElementById(output);
+          element.appendChild(listItem);
+        }
+      }
+      //adds values to valArray, clears input fields, and returns errors
+      function addValues() {
+        var inputs = document.getElementById("inputFields").getElementsByClassName("inputValue"); //get input
+        document.getElementById("error").innerHTML = ""; //clear error field
+        for (var i = 0; i < inputs.length; i++) {
+          var inputValue = inputs[i].value; //get input Part 2
+          //if value = 0, return error
+          if (inputValue === "0") {
+            var node = document.createElement("P");
+            var textnode = document.createTextNode("Error: user input 0");
+            node.appendChild(textnode);
+            document.getElementById("error").appendChild(node);
+          } //if value is blank, return error
+          else if (inputValue === "") {
+            var node = document.createElement("P");
+            var textnode = document.createTextNode("Error: input field blank");
+            node.appendChild(textnode);
+            document.getElementById("error").appendChild(node);
+          } //else, add number to array
+          else {
+            valArray.push(Number(inputValue));
+          }
+          inputs[i].value = ""; //clear input field (stopped working idk y)
+        }
+        printList ("valOutput", valArray); //print array
+      }
+      //multiplies for every value in array
+      function multValues() {
+        for (var i = 0; i < valArray.length; i++) {
+          value1 = Number(valArray[i]);
+          nextNum = i+1;
+          if (nextNum < valArray.length) {
+            value2 = Number(valArray[nextNum]);
+          } else {
+            value2 = Number(valArray[0]);
+          }
+          product = value1 * value2;
+          output = value1 + "*" + value2 + " = " + product;
+          multNumbers.push(output);
+          printList("multOutput", multNumbers);
+        }
+      }
+      //divides for every value in array
+      function divValues() {
+        i = 0;
+        while (i < valArray.length) {
+          value1 = Number(valArray[i]);
+          nextNum = i + 1;
+          if (nextNum < valArray.length) {
+            value2 = Number(valArray[nextNum]);
+          } else {
+            value2 = Number(valArray[0]);
+          }
+          quotient = value1 / value2;
+          output = value1 + "/" + value2 + " = " + quotient;
+          divNumbers.push(output);
+          i++;
+        }
+        printList("divOutput", divNumbers);
+      }
+      //clears array
+      function clearArray(arrayName) {
+        arrayName.length = 0;
+      }
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Eleanor">
+    <title>Unit C4 Lesson 5</title>
+    <style>
+      input {
+        width: 50px;
+      }
+      #buttons {
+        margin-top: 5px;
+        display: flex;
+        flex-direction: column;
+        width: 10%;
+      }
+      #buttons button {
+        margin: 2px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Unit C4 Lesson 5</h1>
+    <!--Output (in the form of a list)-->
+    <ul id="output"></ul>
+    <p id="sumOutput"></p>
+    <!--Input fields-->
+    <div id="inputFields">
+      <input type="number" id="num1">
+      <input type="number" id="num2">
+      <input type="number" id="num3">
+      <input type="number" id="num4">
+    </div>
+    <!--Buttons-->
+    <div id="buttons">
+      <button onclick="addValues(myArray); printList(myArray)">Add Values</button>
+      <button onclick="myArray.sort(function(a, b) {return a - b}); printList(myArray)">Sort</button>
+      <button onclick="clearArray(myArray); printList(myArray)">Clear List</button>
+      <button onclick="sumValues(myArray)">Sum Values</button>
+    </div>
+
+    <!--JS-->
+    <script>
+      //creates array when doc is loaded
+      const myArray = [];
+      //adds values and clears input fields
+      function addValues() {
+        addItem(String(document.getElementById("num1").value));
+        addItem(String(document.getElementById("num2").value));
+        addItem(String(document.getElementById("num3").value));
+        addItem(String(document.getElementById("num4").value));
+        document.getElementById("num1").value = "";
+        document.getElementById("num2").value = "";
+        document.getElementById("num3").value = "";
+        document.getElementById("num4").value = "";
+      }
+      //checks if field is blank. if false, adds to myArray
+      function addItem(addedValue,) {
+        if (addedValue != "") {
+          myArray.push(addedValue);
+        }
+      }
+      //clears ul, then adds li for each item in array
+      function printList(arrayName) {
+        document.getElementById("output").innerHTML = "";
+        for (i in arrayName) {
+          const listItem = document.createElement("li");
+          const node = document.createTextNode(arrayName[i]);
+          listItem.appendChild(node);
+          const element = document.getElementById("output");
+          element.appendChild(listItem);
+        }
+      }
+      //clears array
+      function clearArray(arrayName) {
+        arrayName.length = 0;
+      }
+      //adds value to sum for every value in array
+      function sumValues(x) {
+        sum = 0
+        for (i in x) {
+          value = Number(x[i])
+          sum = value + sum;
+        }
+        document.getElementById("sumOutput").innerHTML = "The sum is " + String(sum);
+      }
+    </script>
+
+  </body>
+</html>
