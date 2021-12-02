@@ -1,2 +1,7 @@
 # CompSci2021-2021
-HTML Projects from my CS class
+These are my HTML projects from my Computer Science class.
+## Units
+* Unit 1: Web Science
+* Unit 2: HTML
+* Unit 3: CSS
+* Unit 4: Javascript
