@@ -1,0 +1,97 @@
+* {
+  font-family: Arial, sans-serif;
+  color: black;
+}
+hr {
+  color: DarkSlateBlue;
+}
+body {
+  margin-left: 200px;
+  margin-right: 200px;
+}
+details {
+  margin-left: 50px;
+  padding-bottom: 2px;
+}
+details summary{
+  padding: 2px;
+  border: 1px solid DarkGray;
+}
+/*Head*/
+.title {
+  color: Black;
+  display: flex;
+  justify-content: center;
+}
+.title img {
+  display: inline;
+  height: 50px;
+}
+.title h1 {
+  margin-left: 50px;
+  display: inline;
+}
+/*Navigation Bar*/
+nav {
+  background-color: DarkSlateBlue;
+  height: 30px;
+  display: flex;
+  flex-flow: row nowrap;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  padding: 2px;
+}
+nav a {
+  display: block;
+  color: White;
+  font-size: 15px;
+  text-decoration: none;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+nav a:hover {
+  background-color: #BFBBD6;
+  color: Black;
+}
+
+/*Dropdowns*/
+.dropdown-link {
+  display: block;
+  text-decoration: none;
+  padding: 5px;
+}
+.dropdown-link:hover {
+  color: white;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+}
+.dropdown:hover .dropdown-content{
+  display: block;
+}
+/*Footer*/
+footer {
+  margin-top: 20px;
+  background-color: DarkSlateBlue;
+  display: flex;
+  flex-flow: column nowrap;
+  text-align: left;
+  justify-content: center;
+  width: 100%;
+  padding: 2px;
+}
+footer a {
+  display: block;
+  color: White;
+  font-size: 10px;
+  text-decoration: none;
+  padding: 2px;
+  margin-left: 50px;
+}
