@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Eleanor">
+    <meta name="description" content="displays month and day of week">
+    <title>Unit 4 Lesson 9: Dates</title>
+
+    <style media="screen">
+      td {
+        border: 1px solid black;
+        padding: 2px;
+        width: 80px;
+        text-align: center;
+      }
+      #buttons {
+        display: flex;
+        flex-flow: column;
+        width: 150px;
+        margin-top: 5px;
+      }
+    </style>
+
+    <script>
+      const weekList = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+      function startProgram() {
+        for (var i = 0; i < weekList.length; i++) {
+          if (new Date().getDay() == i) {
+            document.getElementById("daysOfWeek").childNodes[i].style.color = "red";
+          }
+          const listItem = document.createElement("td");
+          const node = document.createTextNode(weekList[i]);
+          listItem.appendChild(node);
+          const element = document.getElementById("daysOfWeek");
+          element.appendChild(listItem);
+        }
+      }
+
+      function displayMonth() {
+        const monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        var month = new Date().getMonth();
+        month = monthList[month];
+        document.getElementById("displayMonth").innerHTML = month;
+      }
+      function displayDay() {
+        var day = new Date().getDay();
+        day = weekList[day];
+        document.getElementById("displayDay").innerHTML = day;
+      }
+
+    </script>
+
+  </head>
+
+  <body onload="startProgram()">
+    <h1>Unit 4 Lesson 9: Dates</h1>
+    <table>
+      <tr id="daysOfWeek">
+      </tr>
+    </table>
+    <div id="buttons">
+      <button onclick="displayMonth()" id="displayMonth">Find the month</button>
+      <button onclick="displayDay()" id="displayDay">Find the day of the week</button>
+    </div>
+  </body>
+</html>
