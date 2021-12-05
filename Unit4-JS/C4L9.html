@@ -22,18 +22,18 @@
     </style>
 
     <script>
-      const weekList = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+      const weekList = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
       function startProgram() {
         for (var i = 0; i < weekList.length; i++) {
-          if (new Date().getDay() == i) {
-            document.getElementById("daysOfWeek").childNodes[i].style.color = "red";
-          }
           const listItem = document.createElement("td");
           const node = document.createTextNode(weekList[i]);
           listItem.appendChild(node);
           const element = document.getElementById("daysOfWeek");
           element.appendChild(listItem);
+          if (new Date().getDay() == i) {
+            document.getElementById("daysOfWeek").lastChild.style.color = "red";
+          }
         }
       }
 
