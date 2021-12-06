@@ -23,9 +23,11 @@
     </style>
 
     <script>
+      //creates list of week days. gets used in startProgram() and displayDay()
       const weekList = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
       function startProgram() {
+        //creates table
         for (var i = 0; i < weekList.length; i++) {
           const listItem = document.createElement("td");
           const node = document.createTextNode(weekList[i]);
@@ -33,6 +35,7 @@
           const element = document.getElementById("daysOfWeek");
           element.appendChild(listItem);
         }
+        //colors days of week
         for (var i = 0; i < weekList.length; i++) {
           if (new Date().getDay() == i) {
             document.getElementById("daysOfWeek").childNodes[i+1].style.color = "red";
@@ -45,6 +48,7 @@
         }
       }
 
+      //self-explainatory
       function displayMonth() {
         const monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
         var month = new Date().getMonth();
@@ -56,6 +60,8 @@
         day = weekList[day];
         document.getElementById("displayDay").innerHTML = day;
       }
+      
+      //gets inputs and changes color
       function changeColor() {
         var color = document.getElementById("colorInput").value;
         var day = document.getElementById("tableBox").value
