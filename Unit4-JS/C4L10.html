@@ -36,16 +36,13 @@
           element.appendChild(listItem);
         }
         //colors days of week
-        for (var i = 0; i < weekList.length; i++) {
-          if (new Date().getDay() == i) {
-            document.getElementById("daysOfWeek").childNodes[i+1].style.color = "red";
-            var nextDay = i+2;
-            if (nextDay == weekList.length) {
-              nextDay = 1;
-            }
-            document.getElementById("daysOfWeek").childNodes[nextDay].style.backgroundColor = "yellow";
-          }
+        var today = new Date().getDay() + 1;
+        var tomorrow = today + 1;
+        if (tomorrow == weekList.length) {
+          tomorrow = 1;
         }
+        document.getElementById("daysOfWeek").childNodes[today].style.color = "red";
+        document.getElementById("daysOfWeek").childNodes[tomorrow].style.backgroundColor = "yellow";
       }
 
       //self-explainatory
@@ -60,7 +57,7 @@
         day = weekList[day];
         document.getElementById("displayDay").innerHTML = day;
       }
-      
+
       //gets inputs and changes color
       function changeColor() {
         var color = document.getElementById("colorInput").value;
