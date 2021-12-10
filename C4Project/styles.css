@@ -1,0 +1,22 @@
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.blank {
+  background-color: gainsboro;
+}
+.weekday {
+  height: 14px;
+}
+td {
+  height: 75px;
+  vertical-align: top;
+}
+th {
+  border: 1px solid black;
+  width: 100px;
+}
+div {
+  background-color: lightBlue;
+  text-align: center;
+}
