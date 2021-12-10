@@ -1,10 +1,10 @@
 const monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const weekList = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+let month = new Date().getMonth();
+let year = new Date().getFullYear();
 
 function createCalendar() {
-  //gets month and year
-  let month = new Date().getMonth();
-  let year = new Date().getFullYear();
+  //displays month and year
   document.getElementById("displayMonth").innerHTML = monthList[month] + " " + year;
   //creates table
   const daysInMonth = new Date(year, month, 0).getDate() + 1;
@@ -44,20 +44,25 @@ function createCalendar() {
       const element = document.getElementById("calendar");
       element.appendChild(listItem);
     }
-    //creates day
+    //creates day, with id of day
     const container = document.createElement("td");
     const dayDiv = document.createElement("div");
+    const dayAttribute = document.createAttribute("id");
+    dayAttribute.value = i;
     const text = document.createTextNode(i + 1);
     const element = document.getElementsByTagName("TR")[tableRow];
+    dayDiv.setAttribute("class", "date");
     dayDiv.appendChild(text);
+    container.setAttribute("id", i+1);
     container.appendChild(dayDiv);
     element.appendChild(container);
   }
   //creates blank days
   let lastDay = new Date(year, month, daysInMonth).getDay();
+  let tableRow = (daysInMonth + firstDay - lastDay - 1)/7 + 1;
   for (var i = 7; i > lastDay; i--) {
     const listItem = document.createElement("td");
-    const element = document.getElementsByTagName("TR")[5];
+    const element = document.getElementsByTagName("TR")[tableRow];
     element.appendChild(listItem);
     element.lastChild.setAttribute("class", "blank");
   }

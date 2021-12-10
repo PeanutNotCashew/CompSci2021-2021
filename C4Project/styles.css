@@ -1,6 +1,7 @@
 table {
   border: 1px solid black;
   border-collapse: collapse;
+  background: whiteSmoke;
 }
 .blank {
   background-color: gainsboro;
@@ -11,6 +12,7 @@ table {
 td {
   height: 75px;
   vertical-align: top;
+  text-overflow: clip;
 }
 th {
   border: 1px solid black;
@@ -19,4 +21,5 @@ th {
 div {
   background-color: lightBlue;
   text-align: center;
+  text-overflow: clip;
 }
