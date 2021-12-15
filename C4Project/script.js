@@ -2,12 +2,15 @@ const monthList = ["January", "February", "March", "April", "May", "June", "July
 const weekList = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const timeList = ["8:00 AM", "8:30 AM", "9:00 AM", "9:30 AM","10:00 AM","10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM"]
 let today = new Date().getDate();
-let month = new Date().getMonth();
-let year = new Date().getFullYear();
-const daysInMonth = new Date(year, month, 0).getDate() + 1;
+const thisMonth = new Date().getMonth();
+const thisYear = new Date().getFullYear();
+let month = thisMonth;
+let year = thisYear;
 var appointmentDay = "";
 
 function createCalendar() {
+  const daysInMonth = new Date(year, month, 0).getDate() + 1;
+  document.getElementById("calendar").innerHTML = "";
   //displays month and year
   document.getElementById("calendarHead").innerHTML = monthList[month] + " " + year;
   //creates table
@@ -69,9 +72,34 @@ function createCalendar() {
     element.appendChild(listItem);
     element.lastChild.setAttribute("class", "blank");
   }
-  document.getElementById(today + 1).childNodes[0].style.backgroundColor = "steelBlue";
-  document.getElementById(today + 1).childNodes[0].style.color = "white";
+  //signifies today
+  if (month == thisMonth && year == thisYear) {
+    document.getElementById(today + 1).childNodes[0].style.backgroundColor = "steelBlue";
+    document.getElementById(today + 1).childNodes[0].style.color = "white";
+  }
   //note to self: 8-4
+}
+
+function lastMonth() {
+  if (month == 0) {
+    month = 11;
+    year --;
+  }
+  else {
+    month --;
+  }
+  createCalendar();
+}
+
+function nextMonth() {
+  if (month == 11) {
+    month = 0;
+    year ++;
+  }
+  else {
+    month ++;
+  }
+  createCalendar();
 }
 
 function createForm(day) {

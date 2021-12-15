@@ -12,6 +12,7 @@ h2 {
 table {
   border: 1px solid black;
   border-collapse: collapse;
+  margin-top: 5px;
 }
 tr {
   display: flex;

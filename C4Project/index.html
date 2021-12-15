@@ -10,45 +10,29 @@
   <body onload="createCalendar()">
     <h1>Monthly Planner - Eleanor</h1>
     <h2 id="calendarHead"></h2>
+    <button onclick="lastMonth()">&#9668;</button>
+    <button onclick="nextMonth()">&#9658;</button>
     <table id="calendar"></table>
 
     <br>
 
-      <div id="modal">
-        <h2 id="displayDay"></h2>
-        <div class="tab">
-          <h3>Choose Action:</h3>
-          <button onclick="showAdd()">Add</button>
-          <button type="button" name="button">Modify</button>
-          <button type="button" name="button">Delete</button>
-          <button onclick="hideForm()">Cancel</button>
-        </div>
-        <div class="tab">
-          <h3>Add Event:</h3>
-          <select id="appointmentTime" size="1">
-            <option value="1">8:00 AM</option>
-            <option value="2">8:30 AM</option>
-            <option value="3">9:00 AM</option>
-            <option value="4">9:30 AM</option>
-            <option value="5">10:00 AM</option>
-            <option value="6">10:30 AM</option>
-            <option value="7">11:00 AM</option>
-            <option value="8">11:30 AM</option>
-            <option value="9">12:00 PM</option>
-            <option value="10">12:30 PM</option>
-            <option value="11">1:00 PM</option>
-            <option value="12">1:30 PM</option>
-            <option value="13">2:00 PM</option>
-            <option value="14">2:30 PM</option>
-            <option value="15">3:00 PM</option>
-            <option value="16">3:30 PM</option>
-            <option value="17">4:00 PM</option>
-          </select>
-          <input type="text" id="appointmentTextAdd" placeholder="Description">
-          <button onclick="add()">Add</button>
-          <button onclick="hideForm()">Cancel</button>
-        </div>
-        <!--
+    <div id="modal">
+      <h2 id="displayDay"></h2>
+      <div class="tab">
+        <h3>Choose Action:</h3>
+        <button onclick="showAdd()">Add</button>
+        <button type="button" name="button">Modify</button>
+        <button type="button" name="button">Delete</button>
+        <button onclick="hideForm()">Cancel</button>
+      </div>
+      <div class="tab">
+        <h3>Add Event:</h3>
+        <select id="appointmentTime" size="1"></select>
+        <input type="text" id="appointmentTextAdd" placeholder="Description">
+        <button onclick="add()">Add</button>
+        <button onclick="hideForm()">Cancel</button>
+      </div>
+      <!--
         <div class="tab">
           <h3>Delete:</h3>
           <select id="deleteAppointment" size="1"></select>
@@ -63,7 +47,7 @@
           <button onclick="hideForm()">Cancel</button>
         </div>
       -->
-      </div>
+    </div>
 
   </body>
 </html>
