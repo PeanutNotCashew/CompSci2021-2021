@@ -8,6 +8,7 @@ let month = thisMonth;
 let year = thisYear;
 var appointmentDay = "";
 
+//creates calendar
 function createCalendar() {
   const daysInMonth = new Date(year, month, 0).getDate() + 1;
   document.getElementById("calendar").innerHTML = "";
@@ -79,7 +80,7 @@ function createCalendar() {
   }
   //note to self: 8-4
 }
-
+//goes back a month
 function lastMonth() {
   if (month == 0) {
     month = 11;
@@ -90,7 +91,7 @@ function lastMonth() {
   }
   createCalendar();
 }
-
+//goes forwards a month
 function nextMonth() {
   if (month == 11) {
     month = 0;
@@ -101,48 +102,107 @@ function nextMonth() {
   }
   createCalendar();
 }
-
+//when day clicked on, displays form
 function createForm(day) {
   document.getElementById("modal").style.display = "block";
   appointmentDay = day;
   showTab(0);
   document.getElementById("displayDay").innerHTML = monthList[month] + " " + day + " " + year;
 }
-
+//switches between tabs and lists all times
 function showTab(tab) {
   for (var i = 0; i < document.getElementsByClassName("tab").length; i++) {
     document.getElementsByClassName("tab")[i].style.display = "none";
   }
   document.getElementsByClassName("tab")[tab].style.display = "block";
 }
-
+//switches to add tab and displays existing time slots
 function showAdd() {
   showTab(1);
+  document.getElementsByClassName('appointmentTime')[0].innerHTML = "";
   for (var i = 0; i < timeList.length; i++) {
     const listItem = document.createElement("option");
     const node = document.createTextNode(timeList[i]);
     listItem.appendChild(node);
     listItem.setAttribute("value", i+1);
-    const element = document.getElementById("appointmentTime");
+    const element = document.getElementsByClassName('appointmentTime')[0];
     element.appendChild(listItem);
   }
 }
-
+//switches to modify tab and displays existing time slots
+function showModify() {
+  document.getElementsByClassName('appointmentTime')[1].innerHTML = "";
+  let appointmentNum = document.getElementById(appointmentDay).childNodes;
+  if (appointmentNum.length == 1) {
+    showTab(4);
+  }else {
+    showTab(2);
+  }
+  for (var i = 1; i < appointmentNum.length; i++) {
+    const listItem = document.createElement("option");
+    const node = document.createTextNode(appointmentNum[i].innerHTML);
+    listItem.appendChild(node);
+    listItem.setAttribute("value", i);
+    const element = document.getElementsByClassName('appointmentTime')[1];
+    element.appendChild(listItem);
+  }
+}
+//switches to delete tab
+function showDelete() {
+  document.getElementsByClassName('appointmentTime')[2].innerHTML = "";
+  let appointmentNum = document.getElementById(appointmentDay).childNodes;
+  if (appointmentNum.length == 1) {
+    showTab(4);
+  }else {
+    showTab(3);
+  }
+  for (var i = 1; i < appointmentNum.length; i++) {
+    const listItem = document.createElement("option");
+    const node = document.createTextNode(appointmentNum[i].innerHTML);
+    listItem.appendChild(node);
+    listItem.setAttribute("value", i);
+    const element = document.getElementsByClassName('appointmentTime')[2];
+    element.appendChild(listItem);
+  }
+}
+//hides form
 function hideForm(){
   document.getElementById("modal").style.display = "none";
 }
-
+//adds event
 function add() {
-  let time = document.getElementById("appointmentTime").value;
-  let description = document.getElementById("appointmentTextAdd").value
-  let divText = timeList[time-1] + " " + description;
+  let time = document.getElementsByClassName("appointmentTime")[0].value;
+  let description = document.getElementById("appointmentTextAdd").value;
+  let divText = timeList[time-1] + ": " + description;
 
   const listItem = document.createElement("div");
   const node = document.createTextNode(divText);
   listItem.appendChild(node);
   listItem.setAttribute("style", "order: " + time);
+  listItem.setAttribute("class", "appointment")
   const element = document.getElementById(appointmentDay);
   element.appendChild(listItem);
+
+  hideForm();
+}
+//modifies event
+function modify() {
+  let slot = document.getElementsByClassName("appointmentTime")[1].value;
+  let description = document.getElementById("appointmentTextModify").value;
+  let appointmentNum = document.getElementById(appointmentDay).childNodes;
+  let time = Number(appointmentNum[slot].style.order);
+  let divText = timeList[time-1] + ": " + description;
+
+  appointmentNum[slot].innerHTML = divText;
+
+  hideForm();
+}
+//deletes event
+function deleteFinal(){
+  let time = document.getElementsByClassName("appointmentTime")[2].value;
+  let appointmentNum = document.getElementById(appointmentDay);
+
+  appointmentNum.removeChild(appointmentNum.childNodes[time]);
 
   hideForm();
 }

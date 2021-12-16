@@ -16,37 +16,60 @@
 
     <br>
 
-    <div id="modal">
-      <h2 id="displayDay"></h2>
-      <div class="tab">
-        <h3>Choose Action:</h3>
-        <button onclick="showAdd()">Add</button>
-        <button type="button" name="button">Modify</button>
-        <button type="button" name="button">Delete</button>
-        <button onclick="hideForm()">Cancel</button>
-      </div>
-      <div class="tab">
-        <h3>Add Event:</h3>
-        <select id="appointmentTime" size="1"></select>
-        <input type="text" id="appointmentTextAdd" placeholder="Description">
-        <button onclick="add()">Add</button>
-        <button onclick="hideForm()">Cancel</button>
-      </div>
+    <div id="customize">
       <!--
+      change planner name
+      choose main color theme (dark, light, high contrast)
+      change form color theme
+    -->
+    </div>
+
+    <div id="modal">
+      <div id="form">
+        <h2 id="displayDay"></h2>
         <div class="tab">
-          <h3>Delete:</h3>
-          <select id="deleteAppointment" size="1"></select>
-          <button id="deleteFinal">Delete</button>
-          <button onclick="hideForm()">Cancel</button>
+          <h3>Choose Action:</h3>
+          <div class="buttons">
+            <button onclick="showAdd()">Add</button>
+            <button onclick="showModify()">Modify</button>
+            <button onclick="showDelete()">Delete</button>
+            <button onclick="hideForm()">Cancel</button>
+          </div>
+        </div>
+        <div class="tab">
+          <h3>Add Event:</h3>
+          <select class="appointmentTime" size="1"></select>
+          <input type="text" id="appointmentTextAdd" placeholder="Description">
+          <div class="buttons">
+            <button onclick="add()">Add</button>
+            <button onclick="hideForm()">Cancel</button>
+          </div>
         </div>
         <div class="tab">
           <h3>Modify Event:</h3>
-          <select id="deleteAppointment" size="1"></select>
+          <select class="appointmentTime" size="1"></select>
           <input type="text" id="appointmentTextModify" placeholder="Description">
-          <button id="modifyFinal">Modify</button>
-          <button onclick="hideForm()">Cancel</button>
+          <div class="buttons">
+            <button onclick="modify()">Modify</button>
+            <button onclick="hideForm()">Cancel</button>
+          </div>
         </div>
-      -->
+        <div class="tab">
+          <h3>Delete Event:</h3>
+          <select class="appointmentTime" size="1"></select>
+          <div class="buttons">
+            <button onclick="deleteFinal()">Delete</button>
+            <button onclick="hideForm()">Cancel</button>
+          </div>
+        </div>
+        <div class="tab">
+          <h3>Error:</h3>
+          <p>No events found.</p>
+          <div class="buttons">
+            <button onclick="hideForm()">Exit</button>
+          </div>
+        </div>
+      </div>
     </div>
 
   </body>
