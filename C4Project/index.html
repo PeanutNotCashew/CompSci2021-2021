@@ -5,23 +5,41 @@
     <meta name="author" content="Eleanor">
     <title>Unit 4 Project</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" charset="utf-8"></script>
+    <script src="script.js"></script>
+    <style media="screen"></style>
   </head>
-  <body onload="createCalendar()">
+  <body onload="createCalendar(); applyStyles()">
+  <div id="webpage">
     <h1>Monthly Planner - Eleanor</h1>
-    <h2 id="calendarHead"></h2>
+    <h2 id="calendarHead" style="display: inline"></h2>
     <button onclick="lastMonth()">&#9668;</button>
     <button onclick="nextMonth()">&#9658;</button>
+    <button onclick="goToThisMonth()">TODAY</button>
     <table id="calendar"></table>
 
     <br>
 
     <div id="customize">
-      <!--
-      change planner name
-      choose main color theme (dark, light, high contrast)
-      change form color theme
-    -->
+      <h2>Customize:</h2>
+      <div>
+        <h3>Font:</h3>
+        <input type="text" id="font" placeholder="Font Name">
+        <button onclick="changeStyle(1, 'font')">Change Header</button>
+        <button onclick="changeStyle(0, 'font')">Change Other Text</button>
+      </div>
+      <div>
+        <h3>Dimensions:</h3>
+        <input type="number" id="num" placeholder="Length (px)">
+        <button onclick="changeStyle(2, 'num')">Change Width</button>
+        <button onclick="changeStyle(3, 'num')">Change Height</button>
+      </div>
+      <div class="">
+        <h3>Color:</h3>
+        <input type="color" id="color">
+        <button onclick="changeStyle(4, 'color')">Change Background</button>
+      </div>
+      <br>
+      <button onclick="defaultStyles()">Reset Styles</button>
     </div>
 
     <div id="modal">
@@ -71,6 +89,6 @@
         </div>
       </div>
     </div>
-
+  </div>
   </body>
 </html>

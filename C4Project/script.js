@@ -102,6 +102,12 @@ function nextMonth() {
   }
   createCalendar();
 }
+//goes to this month
+function goToThisMonth() {
+  month = thisMonth;
+  year = thisYear;
+  createCalendar();
+}
 //when day clicked on, displays form
 function createForm(day) {
   document.getElementById("modal").style.display = "block";
@@ -205,4 +211,26 @@ function deleteFinal(){
   appointmentNum.removeChild(appointmentNum.childNodes[time]);
 
   hideForm();
+}
+
+// font, headerFont, cellWidth, cellHeight, backgroundColor
+let styles = ["arial", "georgia", "100", "75", "green"];
+
+function changeStyle(styleNum, inputName) {
+  styles[styleNum] = document.getElementById(inputName).value;
+  applyStyles();
+}
+
+function defaultStyles() {
+  styles = ["arial", "georgia", "100", "75", "green"];
+  applyStyles();
+}
+
+function applyStyles() {
+  let regularFont = "* {font-family: " + styles[0] + ", sans-serif}"
+  let headerFont = "h1 {font-family: " + styles[1] + ", sans-serif}"
+  let tableHead = "th {width: " + styles[2] + "px}"
+  let tableCell = "td {width: " + styles[2] + "px;" + " height:" + styles[3] + "px}"
+  let webpageColor = "body {background-color: " + styles[4] + "}"
+  document.getElementsByTagName("style")[0].innerHTML = webpageColor + " " + regularFont + " " + headerFont + " " + tableHead + " " + tableCell;
 }
