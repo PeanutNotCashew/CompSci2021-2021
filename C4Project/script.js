@@ -1,7 +1,9 @@
+//value references
 const monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const weekList = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const timeList = ["8:00 AM", "8:30 AM", "9:00 AM", "9:30 AM","10:00 AM","10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM"]
-let today = new Date().getDate();
+//set variables
+const today = new Date().getDate();
 const thisMonth = new Date().getMonth();
 const thisYear = new Date().getFullYear();
 let month = thisMonth;
@@ -115,14 +117,14 @@ function createForm(day) {
   showTab(0);
   document.getElementById("displayDay").innerHTML = monthList[month] + " " + day + " " + year;
 }
-//switches between tabs and lists all times
+//switches between tabs
 function showTab(tab) {
   for (var i = 0; i < document.getElementsByClassName("tab").length; i++) {
     document.getElementsByClassName("tab")[i].style.display = "none";
   }
   document.getElementsByClassName("tab")[tab].style.display = "block";
 }
-//switches to add tab and displays existing time slots
+//switches to add tab and displays all times
 function showAdd() {
   showTab(1);
   document.getElementsByClassName('appointmentTime')[0].innerHTML = "";
@@ -153,7 +155,7 @@ function showModify() {
     element.appendChild(listItem);
   }
 }
-//switches to delete tab
+//switches to delete tab and displays existing time slots
 function showDelete() {
   document.getElementsByClassName('appointmentTime')[2].innerHTML = "";
   let appointmentNum = document.getElementById(appointmentDay).childNodes;
@@ -175,7 +177,7 @@ function showDelete() {
 function hideForm(){
   document.getElementById("modal").style.display = "none";
 }
-//adds event
+//creates event with text and time slot (order)
 function add() {
   let time = document.getElementsByClassName("appointmentTime")[0].value;
   let description = document.getElementById("appointmentTextAdd").value;
@@ -191,7 +193,7 @@ function add() {
 
   hideForm();
 }
-//modifies event
+//gets event div and modifies inner text
 function modify() {
   let slot = document.getElementsByClassName("appointmentTime")[1].value;
   let description = document.getElementById("appointmentTextModify").value;
@@ -203,7 +205,7 @@ function modify() {
 
   hideForm();
 }
-//deletes event
+//gets event div and deletes
 function deleteFinal(){
   let time = document.getElementsByClassName("appointmentTime")[2].value;
   let appointmentNum = document.getElementById(appointmentDay);
@@ -215,17 +217,17 @@ function deleteFinal(){
 
 // font, headerFont, cellWidth, cellHeight, backgroundColor
 let styles = ["arial", "georgia", "100", "75", "green"];
-
+//changes item in style array
 function changeStyle(styleNum, inputName) {
   styles[styleNum] = document.getElementById(inputName).value;
   applyStyles();
 }
-
+//saves defaults
 function defaultStyles() {
   styles = ["arial", "georgia", "100", "75", "green"];
   applyStyles();
 }
-
+//inputs styles
 function applyStyles() {
   let regularFont = "* {font-family: " + styles[0] + ", sans-serif}"
   let headerFont = "h1 {font-family: " + styles[1] + ", sans-serif}"
