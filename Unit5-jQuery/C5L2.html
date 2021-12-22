@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Eleanor">
+    <meta name="description" content="">
+    <title>Unit C5 Lesson 2: Beginning jQuery</title>
+    <!--import jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $("#paragraphs").mouseenter(function(){
+          $("img").hide();
+        });
+        $("#paragraphs").click(function(){
+          $("img").show();
+        });
+        $("#paragraphs").mouseleave(function(){
+          $("h1").toggle();
+        });
+        $("h1").dblclick(function(){
+          $("#paragraphs").toggle();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Unit C5 Lesson 2: Beginning jQuery</h1>
+    <div>
+      <img src="https://tse4.mm.bing.net/th/id/OIP.bN786-G-MjTMUL80ZAGHmQHaBz?pid=ImgDet&rs=1" alt="jQuery Logo">
+    </div>
+    <div id="paragraphs">
+      <p>Et netus et malesuada fames. Malesuada pellentesque elit eget gravida. Faucibus scelerisque eleifend donec pretium. Lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare. Amet nulla facilisi morbi tempus iaculis urna id. Purus in mollis nunc sed id semper risus in hendrerit. Ridiculus mus mauris vitae ultricies. Gravida dictum fusce ut placerat orci. Nulla pharetra diam sit amet nisl suscipit adipiscing bibendum. Diam vulputate ut pharetra sit amet aliquam id diam. Arcu non sodales neque sodales ut etiam sit. Mi ipsum faucibus vitae aliquet nec ullamcorper sit. Varius morbi enim nunc faucibus a. Blandit aliquam etiam erat velit scelerisque in dictum non. Mauris a diam maecenas sed enim ut sem.</p>
+
+      <p>Sit amet commodo nulla facilisi. Morbi blandit cursus risus at ultrices mi tempus imperdiet. Venenatis tellus in metus vulputate. Sed felis eget velit aliquet sagittis id consectetur. Eget lorem dolor sed viverra ipsum nunc. Orci dapibus ultrices in iaculis nunc sed augue lacus viverra. Dictum sit amet justo donec enim diam. Etiam erat velit scelerisque in dictum non. Egestas egestas fringilla phasellus faucibus scelerisque eleifend. Varius quam quisque id diam vel quam elementum pulvinar.</p>
+    </div>
+
+  </body>
+</html>
