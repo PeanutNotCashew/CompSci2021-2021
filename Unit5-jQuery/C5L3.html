@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Eleanor">
+    <meta name="description" content="Intro to jQuery animations.">
+    <title>Unit C5 Lesson 3: jQuery Animations</title>
+    <!--import jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--other content-->
+    <style media="screen">
+      div {
+        margin: 2px;
+      }
+      #div1 {
+        background-color: red;
+        position: relative;
+        height: 110px;
+        width: 50px;
+      }
+      #div2 {
+        background-color: green;
+        position: relative;
+        height: 20px;
+        width: 100px;
+      }
+      #div3 {
+        background-color: blue;
+        position: relative;
+        height: 70px;
+        width: 80px;
+      }
+    </style>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        //callback and fade
+        $("#button1").click(function(){
+          $("#div1").fadeToggle("slow", function(){
+            $("#div1").fadeToggle(100);
+            $("#div1").fadeToggle(100);
+            $("#div1").fadeToggle(100);
+            $("#div1").fadeToggle(100);
+            $("#div1").fadeToggle(100);
+            $("#div1").fadeToggle(100);
+          });
+        });
+        //chaining and slide
+        $("#button2").click(function(){
+          $("#div2").slideUp("slow")
+            .slideDown("slow");
+        });
+        //queuing and animate
+        $("#button3").click(function(){
+          $("#div3").animate({left: "+=250px"}, "fast");
+          $("#div3").animate({left: "-=250px"}, "slow");
+        });
+      });
+    </script>
+
+  </head>
+  <body>
+    <h1>Unit C5 Lesson 3: jQuery Animations</h1>
+
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <div id="div3" style=""></div>
+
+    <div>
+      <button type="button" id="button1">R</button>
+      <button type="button" id="button2">G</button>
+      <button type="button" id="button3">B</button>
+    </div>
+
+  </body>
+</html>
