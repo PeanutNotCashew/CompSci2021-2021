@@ -16,10 +16,16 @@
           $("h1").text(text);
           $("#textInput").val("");
         });
-        //gets value of input, appends text to start of header, and clears input
+        //gets value of input, adds text to start of header, and clears input
         $("#changeHeaderStart").click(function(){
           var text = $("#textInput").val();
+          $("h1").text(function(i, origCont){
+            $("h1").text(text + origCont);
+          })
+          /*
+          Alternate code (more concise):
           $("h1").prepend(text);
+          */
           $("#textInput").val("");
         });
         //gets value of input, changes img link, and clears input
