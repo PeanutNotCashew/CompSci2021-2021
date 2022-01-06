@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Eleanor">
+    <meta name="description" content="editing HTML using jQuery">
+    <title>Unit C5 Lesson 4: jQuery HTML</title>
+    <!--import jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $("#changeHeader").click(function(){
+          var text = $("#textInput").val();
+          $("h1").text(text);
+          $("#textInput").val("");
+        });
+        $("#changeHeaderStart").click(function(){
+          var text = $("#textInput").val();
+          $("h1").prepend(text);
+          $("#textInput").val("");
+        });
+        $("#changeImage").click(function(){
+          var url = $("#urlInput").val();
+          $("#image").attr("src", url);
+          $("#urlInput").val("");
+        });
+      });
+    </script>
+    <style media="screen">
+      * {
+        margin: 2px;
+      }
+      img {
+        width: 25%
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Unit C5 Lesson 4: jQuery HTML</h1>
+    <img id="image" src="https://th.bing.com/th/id/R.9999c1a8c347b81c5cb5df967664c4c3?rik=FHsenlk6erszpg&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fjquery-logo-png--800.gif&ehk=gsP%2bp%2brVzzjyjQeEjqAhY1ODCpzk5LsWcq2W9rIaTQs%3d&risl=&pid=ImgRaw&r=0">
+    <br>
+    <input type="text" placeholder="Header Text" id="textInput">
+    <br>
+    <button id="changeHeader">Change Header</button>
+    <button id="changeHeaderStart">Add to Header Start</button>
+    <br>
+    <input type="url" placeholder="Image URL" id="urlInput">
+    <br>
+    <button id="changeImage">Change Image URL</button>
+  </body>
+</html>
