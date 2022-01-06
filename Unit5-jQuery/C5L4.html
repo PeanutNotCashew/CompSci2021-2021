@@ -10,16 +10,19 @@
     </script>
     <script type="text/javascript">
       $(document).ready(function(){
+        //gets value of input, changes header, and clears input
         $("#changeHeader").click(function(){
           var text = $("#textInput").val();
           $("h1").text(text);
           $("#textInput").val("");
         });
+        //gets value of input, appends text to start of header, and clears input
         $("#changeHeaderStart").click(function(){
           var text = $("#textInput").val();
           $("h1").prepend(text);
           $("#textInput").val("");
         });
+        //gets value of input, changes img link, and clears input
         $("#changeImage").click(function(){
           var url = $("#urlInput").val();
           $("#image").attr("src", url);
