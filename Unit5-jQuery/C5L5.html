@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Eleanor">
+    <meta name="description" content="editing HTML and CSS using jQuery">
+    <title>Unit C5 Lesson 5: jQuery HTML/CSS</title>
+    <!--import jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        //gets value of input, changes header, and clears input
+        $("#changeHeader").click(function(){
+          var text = $("#textInput").val();
+          $("h1").text(text);
+          $("#textInput").val("");
+        });
+        //gets value of input, adds text to start of header, and clears input
+        $("#changeHeaderStart").click(function(){
+          var text = $("#textInput").val();
+          $("h1").text(function(i, origCont){
+            $("h1").text(text + origCont);
+          })
+          /*
+          Alternate code (more concise):
+          $("h1").prepend(text);
+          */
+          $("#textInput").val("");
+        });
+        //gets value of input, changes img link, and clears input
+        $("#changeImage").click(function(){
+          var url = $("#urlInput").val();
+          $("#image").attr("src", url);
+          $("#urlInput").val("");
+        });
+        //toggles border
+        $("#toggleBorder").click(function(){
+          if ($("#image").attr("class") == "presetBorder") {
+            $("#image").attr("class", "");
+          }
+          else {
+            $("#image").attr("class", "presetBorder");
+          }
+        });
+        //changes header color
+        $("#changeColor").click(function(){
+          var color = $("#colorInput").val();
+          $("h1").css("color", color);
+        });
+
+      });
+    </script>
+    <style media="screen">
+      * {
+        margin: 2px;
+      }
+      img {
+        width: 25%
+      }
+      .presetBorder {
+        border: 3px double green;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Unit C5 Lesson 5: jQuery HTML/CSS</h1>
+    <img id="image" src="https://th.bing.com/th/id/R.9999c1a8c347b81c5cb5df967664c4c3?rik=FHsenlk6erszpg&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fjquery-logo-png--800.gif&ehk=gsP%2bp%2brVzzjyjQeEjqAhY1ODCpzk5LsWcq2W9rIaTQs%3d&risl=&pid=ImgRaw&r=0">
+    <br>
+    <input type="text" placeholder="Header Text" id="textInput">
+    <br>
+    <button id="changeHeader">Change Header</button>
+    <button id="changeHeaderStart">Add to Header Start</button>
+    <br>
+    <input type="url" placeholder="Image URL" id="urlInput">
+    <br>
+    <button id="changeImage">Change Image URL</button>
+    <button id="toggleBorder">Toggle Image Border</button>
+    <br>
+    <input type="text" placeholder="Color" id="colorInput">
+    <br>
+    <button id="changeColor">Change Header Color</button>
+    <br>
+    <input type="text" placeholder="Paragraph" id="paragraphInput">
+    <br>
+    <button id="addParagraph">Insert Paragraph</button>
+    <br>
+    <button id="clearButtons">Clear Button Text</button>
+  </body>
+</html>
