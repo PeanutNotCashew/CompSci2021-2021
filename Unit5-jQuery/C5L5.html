@@ -60,10 +60,12 @@
         let buttonText = [];
         $("#clearButtons").click(function(){
           if ($("button").text() == "") {
+            //x-tra credit: adds button text back
             $("button").text(function(i, origCont){
               $(this).text(buttonText[i])
             });
           } else {
+            //logs button text and empties
             buttonText = [];
             $("button").text(function(i, origCont){
               buttonText.push(origCont);
