@@ -47,8 +47,19 @@
         $("#changeColor").click(function(){
           var color = $("#colorInput").val();
           $("h1").css("color", color);
+          $("#colorInput").val("");
         });
-
+        //adds paragraph before image
+        $("#addParagraph").click(function(){
+          var text = $("#paragraphInput").val();
+          var paragraph = $("<p></p>").text(text);
+          $("img").before(paragraph);
+          $("#paragraphInput").val("");
+        });
+        //clears button text
+        $("#clearButtons").click(function(){
+          $("button").empty();
+        });
       });
     </script>
     <style media="screen">
