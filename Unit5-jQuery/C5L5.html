@@ -56,12 +56,24 @@
           $("img").before(paragraph);
           $("#paragraphInput").val("");
         });
-        //clears button text
+        //toggles button text
+        let buttonText = [];
         $("#clearButtons").click(function(){
-          $("button").empty();
+          if ($("button").text() == "") {
+            $("button").text(function(i, origCont){
+              $(this).text(buttonText[i])
+            });
+          } else {
+            buttonText = [];
+            $("button").text(function(i, origCont){
+              buttonText.push(origCont);
+            });
+            $("button").empty();
+          }
         });
       });
     </script>
+
     <style media="screen">
       * {
         margin: 2px;
@@ -96,6 +108,6 @@
     <br>
     <button id="addParagraph">Insert Paragraph</button>
     <br>
-    <button id="clearButtons">Clear Button Text</button>
+    <button id="clearButtons">Toggle Button Text</button>
   </body>
 </html>
