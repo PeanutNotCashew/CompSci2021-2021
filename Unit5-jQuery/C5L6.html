@@ -11,7 +11,21 @@
 
     <title>Unit C5 Lesson 6: jQuery DOM</title>
     <meta name="author" content="Eleanor">
-    <meta name="description" content="traversing the DOM using jQuery">
+    <meta name="description" content="changes the colors of other cells when a cell is clicked on">
+
+    <script>
+      $(document).ready(function(){
+        $("td").click(function(){
+          $(this).css("background-color", "#198754");
+          $(this).prevAll().css("background-color", "white");
+          $(this).prev().css("background-color", "#dc3545");
+          $(this).nextAll().css("background-color", "#ffc107");
+          $(this).parent().siblings().children().css("background-color", "#6f42c1");
+          $("th").css("background-color", "white");
+        });
+      });
+    </script>
+
   </head>
   <body>
     <!--import Bootstrap JS-->
