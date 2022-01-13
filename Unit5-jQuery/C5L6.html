@@ -20,9 +20,14 @@
           $(this).css("background-color", "#198754");
           $(this).prev().css("background-color", "#dc3545");
           $(this).nextAll().css("background-color", "#ffc107");
-          var cellPosition = $(this).prevAll().length;
+
+          let cellPosition = $(this).prevAll().length;
+          /* alt code:
+          let cellPosition = $(this).parent().children().index(this);
+          */
           $(this).parent().prev().children().eq(cellPosition).css("background-color", "#6f42c1");
           $(this).parent().next().children().eq(cellPosition).css("background-color", "#6f42c1");
+
           $("th").css("background-color", "white");
         });
       });
