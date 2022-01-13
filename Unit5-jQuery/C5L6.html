@@ -24,6 +24,7 @@
           let cellPosition = $(this).prevAll().length;
           /* alt code:
           let cellPosition = $(this).parent().children().index(this);
+          let cellPosition = $(this).index();
           */
           $(this).parent().prev().children().eq(cellPosition).css("background-color", "#6f42c1");
           $(this).parent().next().children().eq(cellPosition).css("background-color", "#6f42c1");
