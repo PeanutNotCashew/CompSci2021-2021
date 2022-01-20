@@ -5,10 +5,45 @@ const jQ = $.noConflict();
 var memory = 0;
 
 function outputNum() {
-  return Number(jQ("#output").text());
+  try {
+    var result = eval(jQ("#output").text());
+  } catch (e) {
+    var result = "ERROR";
+  } finally {
+    return result;
+  }
 }
 
 jQ(document).ready(function(){
+  //numbers (0-9)
+  jQ(".numbers").click(function(){
+    let buttonValue = jQ(this).text();
+    buttonValue = Number(buttonValue);
+    if (jQ("#output").text() == "0") {
+      jQ("#output").text(buttonValue);
+    }
+    else if (jQ("#output").text() == "ERROR") {
+      jQ("#output").text(buttonValue);
+    } else {
+      jQ("#output").append(buttonValue);
+    }
+  });
+  //signs (+ - / *)
+  jQ(".sign").click(function(){
+    var getSign = jQ(this).text();
+    jQ("#output").append(getSign);
+  });
+  //decimal
+  jQ("#decimal").click(function(){
+    jQ("#output").append(".");
+  })
+  //equals
+  jQ("#equals").click(function(){
+    jQ("#output").text(outputNum());
+    console.log(outputNum());
+  });
+
+  //Special Functions -------------------------
   //MR
   jQ("#memoryReturn").click(function(){
     jQ("#output").text(memory);
@@ -28,16 +63,6 @@ jQ(document).ready(function(){
   //CE
   jQ("#clear").click(function(){
     jQ("#output").text(0);
-  });
-  //numbers (0-9)
-  jQ(".numbers").click(function(){
-    let buttonValue = jQ(this).text();
-    buttonValue = Number(buttonValue);
-    if (jQ("#output").text() == "0") {
-      jQ("#output").text(buttonValue);
-    } else {
-      jQ("#output").append(buttonValue);
-    }
   });
   //percent (divide value in field by 100)
   jQ("#percent").click(function(){
