@@ -21,23 +21,26 @@
     <!--Bootstrap JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-    <div class="container-sm bg-primary" style="width: 400px" id="calcContainer">
-      <div class="row">
-        <div class="col">
+    <div class="container-sm" id="calcContainer">
+      <div class="row" style="margin-bottom: 10px">
+        <div class="col-8 outputField">
           <p id="output">0</p>
+        </div>
+        <div class="col-3 outputField">
+          <p id="memoryStorage"></p>
         </div>
       </div>
       <div class="row">
-        <div class="col" id="memoryClear">
+        <div class="col memEffect" id="memoryClear">
           <p>MC</p>
         </div>
-        <div class="col" id="memoryReturn">
+        <div class="col memEffect" id="memoryReturn">
           <p>MR</p>
         </div>
-        <div class="col" id="memoryAdd">
+        <div class="col memEffect" id="memoryAdd">
           <p>M+</p>
         </div>
-        <div class="col" id="memorySub">
+        <div class="col memEffect" id="memorySub">
           <p>M-</p>
         </div>
         <div class="col" id="clear">

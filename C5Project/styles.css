@@ -1,15 +1,38 @@
 body {
   padding: 10px;
+  background-color: var(--bs-yellow);
 }
 #calcContainer {
-  border: gray 1px solid;
+  border: var(--bs-gray-300) 3px outset;
+  background-color: var(--bs-gray-100);
+  margin-top: 50px;
   padding: 20px;
   border-radius: 10px;
+  width: 400px
 }
 .col {
-  border: gray 1px solid;
+  border: var(--bs-gray-200) 1.5px outset;
+  border-radius: 3px;
+  background-color: white;
   margin: 1px;
-  height: 50px;
+  padding: 5px;
+}
+.outputField {
+  border: var(--bs-gray-400) 1.5px inset;
+  border-radius: 1px;
+  background-color: var(--bs-gray-300);
+  margin: 5px;
+  padding: 5px;
+}
+.memEffect{
+  background-color: var(--bs-gray-700);
+  border-color: var(--bs-gray-700);
+  color: white;
+}
+#clear {
+  background-color: var(--bs-red);
+  border-color: var(--bs-red);
+  color: white;
 }
 p {
   text-align: center;

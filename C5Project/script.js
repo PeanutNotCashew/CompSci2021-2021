@@ -7,14 +7,26 @@ var memory = 0;
 function outputNum() {
   try {
     var result = eval(jQ("#output").text());
+    if (result == "NaN") {
+      result = "ERROR";
+    }
   } catch (e) {
     var result = "ERROR";
   } finally {
     return result;
   }
 }
+function memoryDisplay(numInMem) {
+  if (numInMem == true) {
+    jQ("#memoryStorage").text(memory);
+  } else {
+    jQ("#memoryStorage").text("N/A");
+  }
+}
 
 jQ(document).ready(function(){
+  memoryDisplay(false);
+
   //numbers (0-9)
   jQ(".numbers").click(function(){
     let buttonValue = jQ(this).text();
@@ -37,6 +49,11 @@ jQ(document).ready(function(){
   jQ("#decimal").click(function(){
     jQ("#output").append(".");
   })
+  //invert
+  jQ("#invert").click(function(){
+    jQ("#output").prepend("-(");
+    jQ("#output").append(")");
+  });
   //equals
   jQ("#equals").click(function(){
     jQ("#output").text(outputNum());
@@ -50,15 +67,24 @@ jQ(document).ready(function(){
   });
   //MC
   jQ("#memoryClear").click(function(){
+    memoryDisplay(false);
     memory = 0;
   });
   //M+
   jQ("#memoryAdd").click(function(){
-    memory = memory + outputNum();
+    if (outputNum() != "ERROR") {
+      memory = memory + outputNum();
+      memoryDisplay(true);
+      jQ("#output").text(0);
+    }
   });
   //M-
   jQ("#memorySub").click(function(){
-    memory = memory - outputNum();
+    if (outputNum() != "ERROR") {
+      memory = memory - outputNum();
+      memoryDisplay(true);
+      jQ("#output").text(0);
+    }
   });
   //CE
   jQ("#clear").click(function(){
@@ -76,6 +102,14 @@ jQ(document).ready(function(){
   jQ("#squareRoot").click(function(){
     let squareRoot = Math.sqrt(outputNum());
     jQ("#output").text(squareRoot);
+  });
+
+  //Other Functionalities ---------------------
+  jQ(".col").mousedown(function(){
+    jQ(this).css("border-style", "inset");
+  });
+  jQ(".col").mouseup(function(){
+    jQ(this).css("border-style", "outset");
   });
 
 });
