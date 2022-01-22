@@ -4,6 +4,7 @@ const jQ = $.noConflict();
 //set up memory
 var memory = 0;
 
+//evaluates equation and checks for errors
 function outputNum() {
   try {
     var result = eval(jQ("#output").text());
@@ -16,6 +17,7 @@ function outputNum() {
     return result;
   }
 }
+//decides whether to display memory
 function memoryDisplay(numInMem) {
   if (numInMem == true) {
     jQ("#memoryStorage").text(memory);
@@ -58,16 +60,20 @@ jQ(document).ready(function(){
   });
 
   //Special Functions -------------------------
-  //MR
+  //displays memory in output field
   jQ("#memoryReturn").click(function(){
-    jQ("#output").text(memory);
+    if (jQ("#memoryStorage").text() == "N/A") {
+      jQ("#output").text("ERROR");
+    } else {
+      jQ("#output").text(memory);
+    }
   });
-  //MC
+  //clears memory
   jQ("#memoryClear").click(function(){
     memoryDisplay(false);
     memory = 0;
   });
-  //M+
+  //adds value in field to memory
   jQ("#memoryAdd").click(function(){
     if (outputNum() != "ERROR") {
       memory = memory + outputNum();
@@ -75,7 +81,7 @@ jQ(document).ready(function(){
       jQ("#output").text(0);
     }
   });
-  //M-
+  //subtracts value in field from memory
   jQ("#memorySub").click(function(){
     if (outputNum() != "ERROR") {
       memory = memory - outputNum();
@@ -83,7 +89,7 @@ jQ(document).ready(function(){
       jQ("#output").text(0);
     }
   });
-  //CE
+  //clears output field
   jQ("#clear").click(function(){
     jQ("#output").text(0);
   });
@@ -99,14 +105,6 @@ jQ(document).ready(function(){
   jQ("#squareRoot").click(function(){
     let squareRoot = Math.sqrt(outputNum());
     jQ("#output").text(squareRoot);
-  });
-
-  //Other Functionalities ---------------------
-  jQ(".col").mousedown(function(){
-    jQ(this).css("border-style", "inset");
-  });
-  jQ(".col").mouseup(function(){
-    jQ(this).css("border-style", "outset");
   });
 
   //Key presses (#s, signs, and =) ------------
@@ -166,6 +164,14 @@ jQ(document).ready(function(){
       default:
 
     }
+  });
+
+  //Looks -------------------------------------
+  jQ(".col").mousedown(function(){
+    jQ(this).css("border-style", "inset");
+  });
+  jQ(".col").mouseup(function(){
+    jQ(this).css("border-style", "outset");
   });
 
 });
