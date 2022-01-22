@@ -1,11 +1,13 @@
+/*Uses Bootstrap*/
+
 body {
-  padding: 10px;
+  padding: 20px;
   background-color: var(--bs-yellow);
 }
 #calcContainer {
   border: var(--bs-gray-300) 3px outset;
   background-color: var(--bs-gray-100);
-  margin-top: 50px;
+  margin-top: 20px;
   padding: 20px;
   border-radius: 10px;
   width: 400px

@@ -1,4 +1,4 @@
-// uses jQuery and Bootstrap
+// uses jQuery
 const jQ = $.noConflict();
 
 //set up memory
@@ -31,10 +31,7 @@ jQ(document).ready(function(){
   jQ(".numbers").click(function(){
     let buttonValue = jQ(this).text();
     buttonValue = Number(buttonValue);
-    if (jQ("#output").text() == "0") {
-      jQ("#output").text(buttonValue);
-    }
-    else if (jQ("#output").text() == "ERROR") {
+    if (jQ("#output").text() == "0" || jQ("#output").text() == "ERROR") {
       jQ("#output").text(buttonValue);
     } else {
       jQ("#output").append(buttonValue);
@@ -110,6 +107,65 @@ jQ(document).ready(function(){
   });
   jQ(".col").mouseup(function(){
     jQ(this).css("border-style", "outset");
+  });
+
+  //Key presses (#s, signs, and =) ------------
+  jQ(document).keydown(function(event){
+    switch (event.which) {
+      case 8:
+        jQ("#clear").click();
+        break;
+      case 13:
+        jQ("#equals").click();
+        break;
+      case 48:
+        jQ("#zero").click();
+        break;
+      case 49:
+        jQ("#one").click();
+        break;
+      case 50:
+        jQ("#two").click();
+        break;
+      case 51:
+        jQ("#three").click();
+        break;
+      case 52:
+        jQ("#four").click();
+        break;
+      case 53:
+        jQ("#five").click();
+        break;
+      case 54:
+        jQ("#six").click();
+        break;
+      case 55:
+        jQ("#seven").click();
+        break;
+      case 56:
+        jQ("#eight").click();
+        break;
+      case 57:
+        jQ("#nine").click();
+        break;
+      case 88:
+        jQ("#times").click();
+        break;
+      case 187:
+        jQ("#plus").click();
+        break;
+      case 189:
+        jQ("#minus").click();
+        break;
+      case 190:
+        jQ("#decimal").click();
+        break;
+      case 191:
+        jQ("#divide").click();
+        break;
+      default:
+
+    }
   });
 
 });
