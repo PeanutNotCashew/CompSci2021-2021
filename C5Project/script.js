@@ -33,6 +33,7 @@ jQ(document).ready(function(){
   jQ(".numbers").click(function(){
     let buttonValue = jQ(this).text();
     buttonValue = Number(buttonValue);
+    //or statement
     if (jQ("#output").text() == "0" || jQ("#output").text() == "ERROR") {
       jQ("#output").text(buttonValue);
     } else {
@@ -56,7 +57,8 @@ jQ(document).ready(function(){
   //equals
   jQ("#equals").click(function(){
     jQ("#output").text(outputNum());
-    console.log(outputNum());
+    //for troubleshooting
+    //console.log(outputNum());
   });
 
   //Special Functions -------------------------
@@ -166,7 +168,7 @@ jQ(document).ready(function(){
     }
   });
 
-  //Looks -------------------------------------
+  //Button looks ------------------------------
   jQ(".col").mousedown(function(){
     jQ(this).css("border-style", "inset");
   });

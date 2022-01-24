@@ -18,6 +18,7 @@ body {
   background-color: white;
   margin: 1px;
   padding: 5px;
+  cursor: pointer;
 }
 .outputField {
   border: var(--bs-gray-400) 1.5px inset;
