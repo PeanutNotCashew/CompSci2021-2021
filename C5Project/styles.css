@@ -10,7 +10,7 @@ body {
   margin-top: 20px;
   padding: 20px;
   border-radius: 10px;
-  width: 400px
+  width: 400px;
 }
 .col {
   border: var(--bs-gray-200) 1.5px outset;
@@ -26,6 +26,7 @@ body {
   margin: 5px;
   padding: 5px;
   font-size: 20px;
+  overflow: auto;
 }
 .memEffect{
   background-color: var(--bs-gray-700);
