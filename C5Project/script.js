@@ -3,6 +3,7 @@ const jQ = $.noConflict();
 
 //set up memory
 var memory = 0;
+var ridNumber = true;
 
 //evaluates equation and checks for errors
 function outputNum() {
@@ -34,29 +35,34 @@ jQ(document).ready(function(){
     let buttonValue = jQ(this).text();
     buttonValue = Number(buttonValue);
     //or statement
-    if (jQ("#output").text() == "0" || jQ("#output").text() == "ERROR") {
+    if (jQ("#output").text() == "0" || jQ("#output").text() == "ERROR" || ridNumber == true) {
       jQ("#output").text(buttonValue);
     } else {
       jQ("#output").append(buttonValue);
     }
+    ridNumber = false;
   });
   //signs (+ - / *)
   jQ(".sign").click(function(){
     var getSign = jQ(this).text();
     jQ("#output").append(getSign);
+    ridNumber = false;
   });
   //decimal
   jQ("#decimal").click(function(){
     jQ("#output").append(".");
+    ridNumber = false;
   })
   //invert
   jQ("#invert").click(function(){
     jQ("#output").prepend("-(");
     jQ("#output").append(")");
+    ridNumber = false;
   });
   //equals
   jQ("#equals").click(function(){
     jQ("#output").text(outputNum());
+    ridNumber = true;
     //for troubleshooting
     //console.log(outputNum());
   });
@@ -68,6 +74,7 @@ jQ(document).ready(function(){
       jQ("#output").text("ERROR");
     } else {
       jQ("#output").text(memory);
+      ridNumber = false;
     }
   });
   //clears memory
@@ -98,15 +105,18 @@ jQ(document).ready(function(){
   //percent (divide value in field by 100)
   jQ("#percent").click(function(){
     jQ("#output").text(outputNum()/100);
+    ridNumber = false;
   });
   //divide one by value in field
   jQ("#oneDivide").click(function(){
     jQ("#output").text(1/outputNum());
+    ridNumber = false;
   });
   //get square root
   jQ("#squareRoot").click(function(){
     let squareRoot = Math.sqrt(outputNum());
     jQ("#output").text(squareRoot);
+    ridNumber = false;
   });
 
   //Key presses (#s, signs, and =) ------------
