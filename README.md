@@ -7,6 +7,7 @@ These are my projects from my Computer Science class.
 * Unit 3: CSS
 * Unit 4: JavaScript
 * Unit 5: JQuery
+* Unit 6: Java
 
 ## Notes
 Here are my top tips for coding:
