@@ -6,8 +6,10 @@ class Loop {
 
     System.out.println("Enter text:");
     String output = userInput.nextLine();
+    System.out.println("Enter repetitions:");
+    int repetitions = Integer.parseInt(userInput.nextLine());
 
-    for (int i = 1; i <= 5000; i++) {
+    for (int i = 1; i <= repetitions; i++) {
       System.out.println(i + ". " + output);
     }
   }
