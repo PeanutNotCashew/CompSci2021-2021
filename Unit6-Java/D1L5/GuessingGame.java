@@ -22,7 +22,6 @@ class GuessingGame{
   public static void main(String[] args) {
     int randNum = (int) (Math.random() * 10 + 1); //generates rand # from 1-10
     String answer = Integer.toString(randNum);
-    int numOfTries = 0;
 
     takeAGuess(answer, 0);
 
