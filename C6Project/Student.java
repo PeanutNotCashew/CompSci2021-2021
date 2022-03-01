@@ -10,7 +10,13 @@ public class Student{
   }
 
   public String studentInfo() {
-    //note to self: add info
-    return this.firstName + " " + this.lastName;
+    String sgrade;
+    if (this.grade == 0) {
+      sgrade = "N/a";
+    } else {
+      sgrade = Integer.toString(this.grade);
+    }
+
+    return this.lastName + ", " + this.firstName + ": " + sgrade;
   }
 }
