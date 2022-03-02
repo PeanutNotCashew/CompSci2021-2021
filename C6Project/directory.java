@@ -2,24 +2,136 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class directory{
+  //sorts students alphabetically by last name
+  public static void bubbleSort(ArrayList<Student> array) {
+    Student temp;
+    for (int i = 0; i < array.size(); i++){
+      for(int j = 1; j < array.size()-i; j++) {
+        int k = j-1;
+        if(array.get(k).lastName.compareToIgnoreCase(array.get(j).lastName) > 0){
+          temp = array.get(k);
+          array.set(k, array.get(j));
+          array.set(j, temp);
+        }
+      }
+    }
+  }
+
+  //prints list of students
+  public static void printStudents(ArrayList<Student> arrayName) {
+    System.out.println("");
+    for (int i = 0; i < arrayName.size(); i++) {
+      System.out.println(arrayName.get(i).studentInfo());
+    }
+  }
+
+  //finds student by last name
+  public static int linearSearch(String toFind, ArrayList<Student> arrayName){
+    for (int i = 0; i < arrayName.size(); i++) {
+      if (toFind.compareToIgnoreCase(arrayName.get(i).lastName) == 0) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
   //creates student objects and adds to array
   public static void enterName(ArrayList<Student> arrayName) {
     Scanner nameInput = new Scanner(System.in);
 
-    //gets inputs
+    //gets inputs (name, grade, index)
     System.out.print("Enter last name: ");
     String lname = nameInput.nextLine();
     System.out.print("Enter first name: ");
     String fname = nameInput.nextLine();
-    System.out.print("Enter grade (if n/a enter 0): ");
+    System.out.print("Enter grade (if N/a enter -1): ");
     String gradeNum = nameInput.nextLine();
     int grade = Integer.parseInt(gradeNum);
+    System.out.print("Enter position (if N/a enter -1): ");
+    String posNum = nameInput.nextLine();
+    int position = Integer.parseInt(posNum);
 
     //adds name
-    int i = arrayName.size();
+    int i;
+    if (position == -1) {
+      i = arrayName.size();
+    } else {
+      i = position;
+    }
     arrayName.add(i, new Student());
     arrayName.get(i).Student(fname, lname, grade);
   }
+
+  //for-loop that allows user to add grades
+  public static void enterAllGrades(ArrayList<Student> arrayName) {
+    for (int i = 0; i < arrayName.size(); i++) {
+      arrayName.get(i).changeGrade();
+    }
+  }
+
+
+  public static void chooseAction(ArrayList<Student> arrayName) {
+    Scanner actionInput = new Scanner(System.in);
+    Scanner nameInput = new Scanner(System.in);
+
+    //interface
+    System.out.println("\nActions: \n Add student (1) \n Print all students (2) \n Enter grades (3) \n Exit (4) \n");
+    System.out.print("Select action: ");
+    String selectedAction = actionInput.nextLine();
+    System.out.println("\n");
+
+    //adds student
+    if (selectedAction.compareTo("1") == 0) {
+      enterName(arrayName);
+
+    //prints students
+    } else if (selectedAction.compareTo("2") == 0) {
+      System.out.println("Choose an action: ");
+      System.out.println(" Print list (1) \n Sort list by last name (2)");
+      selectedAction = actionInput.nextLine();
+
+      if (selectedAction.compareTo("1") == 0) {
+        printStudents(arrayName);
+      } else if (selectedAction.compareTo("2") == 0) {
+        bubbleSort(arrayName);
+      } else {
+        System.out.println("Improper input.");
+      }
+
+    //enters grades
+    } else if (selectedAction.compareTo("3") == 0) {
+      System.out.println("Choose an action: ");
+      System.out.println(" Change student (1) \n Change all (2)");
+      selectedAction = actionInput.nextLine();
+
+      //change individual student
+      if (selectedAction.compareTo("1") == 0) {
+        System.out.print("Last name of student: ");
+        String name = nameInput.nextLine();
+        int studentPosition = linearSearch(name, arrayName);
+        if (studentPosition == -1) {
+          System.out.println("Error: This student does not exist.");
+        } else {
+          arrayName.get(studentPosition).changeGrade();
+        }
+      //change all grades
+      } else if (selectedAction.compareTo("2") == 0) {
+        enterAllGrades(arrayName);
+      } else {
+        System.out.println("Incorrect input.");
+      }
+
+    //exits program
+    } else if (selectedAction.compareTo("4") == 0) {
+      System.exit(0);
+
+    //error message
+    } else {
+      System.out.println("Please enter a number. \n");
+    }
+    chooseAction(arrayName);
+  }
+
 
   public static void main(String[] args) {
     //starting students
@@ -30,11 +142,10 @@ class directory{
     ArrayList<Student> studentArray = new ArrayList<Student>();
     for (int i = 0; i < initFnames.length; i++) {
       studentArray.add(i, new Student());
-      studentArray.get(i).Student(initFnames[i], initLnames[i], 0);
-      System.out.println(studentArray.get(i).studentInfo());
-      System.out.println(i);
+      studentArray.get(i).Student(initFnames[i], initLnames[i], -1);
     }
+
+    chooseAction(studentArray);
+
   }
 }
-
-//https://coderanch.com/t/628589/java/create-objects-loop
