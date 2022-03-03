@@ -3,8 +3,14 @@ import java.util.Scanner;
 
 class directory{
   //sorts students alphabetically by last name
-  public static void bubbleSort(ArrayList<Student> array) {
+  public static void bubbleSort(ArrayList<Student> arrayName) {
+    ArrayList<Student> array = new ArrayList<Student>();
     Student temp;
+
+    for (int i = 0; i < arrayName.size(); i++) {
+      array.add(arrayName.get(i));
+    }
+
     for (int i = 0; i < array.size(); i++){
       for(int j = 1; j < array.size()-i; j++) {
         int k = j-1;
@@ -15,6 +21,9 @@ class directory{
         }
       }
     }
+
+    printStudents(array);
+    array = null;
   }
 
   //prints list of students
@@ -78,7 +87,6 @@ class directory{
     System.out.println("\nActions: \n Add student (1) \n Print all students (2) \n Enter grades (3) \n Exit (4) \n");
     System.out.print("Select action: ");
     String selectedAction = actionInput.nextLine();
-    System.out.println("\n");
 
     //adds student
     if (selectedAction.compareTo("1") == 0) {
@@ -86,8 +94,8 @@ class directory{
 
     //prints students
     } else if (selectedAction.compareTo("2") == 0) {
-      System.out.println("Choose an action: ");
-      System.out.println(" Print list (1) \n Sort list by last name (2)");
+      System.out.println("\nChoose an action: ");
+      System.out.println(" Print list (1) \n Print alphabetized (2)");
       selectedAction = actionInput.nextLine();
 
       if (selectedAction.compareTo("1") == 0) {
@@ -100,7 +108,7 @@ class directory{
 
     //enters grades
     } else if (selectedAction.compareTo("3") == 0) {
-      System.out.println("Choose an action: ");
+      System.out.println("\nChoose an action: ");
       System.out.println(" Change student (1) \n Change all (2)");
       selectedAction = actionInput.nextLine();
 
@@ -127,7 +135,7 @@ class directory{
 
     //error message
     } else {
-      System.out.println("Please enter a number. \n");
+      System.out.println("Please enter a number.");
     }
     chooseAction(arrayName);
   }
@@ -135,8 +143,8 @@ class directory{
 
   public static void main(String[] args) {
     //starting students
-    String[] initFnames = {"Marcel", "Todd", "Stefan", "Kaia", "Gary", "Bobbi", "Jay-Jay", "Kenny", "Jovan", "Gracie-Mae", "Kealan"};
-    String[] initLnames = {"Green", "Muir", "Pratt", "Bull", "Rossi", "Aguilar", "Stephens", "Barton", "Iles", "Roche", "Smyth"};
+    String[] initFnames = {"Marcel", "Todd", "Stefan", "Kaia", "Gary", "Bobbi", "Jay-Jay", "Kenny", "Jovan", "Gracie-Mae", "Kealan", "Callum", "Maverick", "Anisah", "Ritchie", "Danial", "Malika", "Shelbie", "Henna", "Kajol", "Leigha", "Jordanne", "Karan", "Libbie", "Rita", "Paulina", "Alishba", "Nichole", "Joel", "Myrtle", "Arianne", "Sheikh", "Lillie-May", "Mustafa", "Ryder", "Blade", "Afsana", "Wayne", "Burhan", "Atticus", "Dafydd", "Shani", "Angharad", "Habiba", "Coby", "Travis", "Kristian", "Nakita", "Kirk", "Skyla", "Shauna", "Abdurrahman", "Wasim", "Terry", "Ed", "Cheyenne", "Kimberly", "Melissa", "Ilayda", "Fathima", "Salma", "Hakim", "Safaa", "Regan", "Maizie", "Faiza", "Norah", "Kristopher", "Elisha", "Janice", "Ahmet", "Sofie", "Natalie", "Inara", "Cai", "Anthony", "Daanyaal", "Aryaan", "Harley", "Humza", "Luka", "Ranveer", "Tanya", "Grover", "Becky", "Eamonn", "Walter", "Rosemary", "Yousef", "Vinny", "Trystan", "Rimsha", "Misha", "Alison", "Jamel", "Thalia", "Jacob", "Krista", "Mari", "Vinay"};
+    String[] initLnames = {"Green", "Muir", "Pratt", "Bull", "Rossi", "Aguilar", "Stephens", "Barton", "Iles", "Roche", "Smyth", "Mata", "Herman", "Steele", "Sawyer", "Wolf", "Francis", "Mccartney", "Downes", "Decker", "Pruitt", "Soto", "Mueller", "Mcguire", "Stephenson", "Redfern", "Cairns", "Gross", "Sosa", "Chester", "Roberson", "Weeks", "Flowers", "Benitez", "Vu", "Woods", "Merritt", "Manning", "Booker", "Pearson", "Mccallum", "Bowen", "Spears", "Bartlett", "Velez", "Barlow", "Greenaway", "Armstrong", "Freeman", "Rosa", "Sims", "Dunne", "Reyna", "Bowden", "Mac", "Kearns", "Lozano", "Lott", "Bates", "Mcculloch", "Beck", "Newman", "Bernard", "Burris", "Whyte", "Guy", "Choi", "Blair", "Logan", "Lane", "Erickson", "Knott", "Aldred", "Naylor", "Clarke", "Smith", "Moon", "Mcmanus", "Wilde", "Hamer", "Maddox", "Pena", "Rose", "Hutchinson", "Mansell", "Barnard", "Lugo", "Ryan", "Donnelly", "Noble", "Mercer", "Olson", "Villanueva", "Wilson", "Wilkerson", "Head", "Hewitt", "Thomas", "Gilbert", "Hayden"};
 
     //creates arraylist with all student classes
     ArrayList<Student> studentArray = new ArrayList<Student>();
