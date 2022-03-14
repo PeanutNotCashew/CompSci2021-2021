@@ -8,6 +8,7 @@ These are my projects from my Computer Science class.
 * Unit 4: JavaScript
 * Unit 5: JQuery
 * Unit 6: Java
+* Unit 7: Object-Oriented Programming
 
 ## Notes
 Here are my top tips for coding:
