@@ -8,6 +8,6 @@ abstract class Shape {
     System.out.println(area);
   }
   void getPeri() {
-    System.out.print(peri);
+    System.out.println(peri);
   }
 }
