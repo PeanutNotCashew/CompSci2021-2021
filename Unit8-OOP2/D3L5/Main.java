@@ -9,6 +9,7 @@ import java.awt.event.*;
 
 public class Main {
   public static JFrame frame;
+  public static JPanel panel;
   public static JLabel userLabel;
   public static JTextField userText;
   public static JLabel passwordLabel;
@@ -16,18 +17,19 @@ public class Main {
   public static JButton loginButton;
   public static JButton changeUser;
   public static JLabel success;
+
   private static String user = "Admin";
   private static String password = "password123";
   private static boolean loggedIn = false;
 
   public static void main(String[] args) {
     // Setting the width and height of frame
-    JFrame frame = new JFrame("My First Swing Example");
+    frame = new JFrame("My First Swing Example");
     frame.setSize(350, 200);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     // Creating panel (same as a div tag in HTML). Can contain text fields, buttons and other components.
-    JPanel panel = new JPanel();
+    panel = new JPanel();
     // adding panel to frame
     frame.add(panel);
     // adding components to the panel.
