@@ -6,21 +6,26 @@ public class Calculator implements ActionListener{
   JFrame frame;
   JPanel panel;
   JTextField textField;
-  JButton[] numberButtons= new JButton[10];
+  JButton[] numberButtons = new JButton[10];
   JButton[] functionButtons = new JButton[9];
   JButton addButton, subButton, mulButton, divButton;
   JButton decButton, equButton, delButton, clrButton, negButton;
 
-  Font f = new Font("Arial", Font.PLAIN, 30);
+  //Color[] colors = {Color(37, 37, 37), Color(230, 240, 221)};
+
   double num1 = 0, num2 = 0, result = 0;
   char operator;
 
-  public Calculator() {
+  public Calculator(String name, String newFont, Color c) {
+    Font f = new Font(newFont, Font.PLAIN, 30);
+
     // Create frame
     frame = new JFrame("Calculator");
     frame.setSize(420, 550);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setLayout(null);
+    frame.setTitle(name);
+    frame.getContentPane().setBackground(c);
 
     // Create display for text
     textField = new JTextField();
@@ -71,6 +76,7 @@ public class Calculator implements ActionListener{
     panel = new JPanel();
     panel.setBounds(50, 100, 300, 300);
     panel.setLayout(new GridLayout(4, 4, 10, 10));
+    panel.setBackground(c);
 
     panel.add(numberButtons[1]);
     panel.add(numberButtons[2]);
