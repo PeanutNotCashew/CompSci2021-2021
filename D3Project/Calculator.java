@@ -82,17 +82,31 @@ public class Calculator implements ActionListener {
   }
 
   public void actionPerformed(ActionEvent e){
-
+    // Number buttons
     for (int i = 0; i < 10; i++) {
       if (e.getSource() == numberButtons[i]) {
         if(nums.size() != operations.size()){
-          String appendText = String.valueOf(i);
           int j = nums.size() - 1;
-          nums.get(j).concat(appendText);
-          System.out.print(nums);
+          String appendText = nums.get(j).concat(String.valueOf(i));
+          nums.set(j, appendText);
+        } else {
+          String appendText = String.valueOf(i);
+          nums.add(appendText);
         }
       }
     }
 
+    // Basic functions
+    for (int i = 7; i < 12; i++) {
+      if (e.getSource() == functionButtons[i]) {
+        if (nums.size() != operations.size()) {
+          String appendText = functionLabels[i];
+          operations.add(appendText);
+        }
+      }
+    }
+
+    System.out.print(nums);
+    System.out.println(operations);
   }
 }
