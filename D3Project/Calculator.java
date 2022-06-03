@@ -10,8 +10,11 @@ public class Calculator implements ActionListener {
   JButton[] numberButtons = new JButton[10];
   JButton[] functionButtons = new JButton[18];
   String[] functionLabels = {"SIN", "COS", "TAN", "RAD", "SQRT", "LOG", "LN", "/", "*", "-", "+", ".", "(-)", "=", ")", "2ND", "DEL", "CLR"};
+
   LinkedList<String> nums = new LinkedList<String>();
   LinkedList<String> operations = new LinkedList<String>();
+  boolean second = false;
+  boolean radians = false;
 
   public Calculator () {
     // Create frame
@@ -28,7 +31,11 @@ public class Calculator implements ActionListener {
 
     //create numbers
     for (int i = 0; i < 10; i++) {
-      numberButtons[i] = new JButton(String.valueOf(i));
+      if (i < 9) {
+        numberButtons[i] = new JButton(String.valueOf(i + 1));
+      } else {
+        numberButtons[i] = new JButton("0");
+      }
       numberButtons[i].addActionListener(this);
       numberButtons[i].setFocusable(false);
     }
@@ -82,27 +89,72 @@ public class Calculator implements ActionListener {
   }
 
   public void actionPerformed(ActionEvent e){
-    // Number buttons
+    // Number buttons (0-9)
     for (int i = 0; i < 10; i++) {
       if (e.getSource() == numberButtons[i]) {
         if(nums.size() != operations.size()){
           int j = nums.size() - 1;
-          String appendText = nums.get(j).concat(String.valueOf(i));
+          String appendText = nums.get(j).concat(numberButtons[i].getText());
           nums.set(j, appendText);
         } else {
-          String appendText = String.valueOf(i);
+          String appendText = numberButtons[i].getText();
           nums.add(appendText);
         }
       }
     }
 
-    // Basic functions
-    for (int i = 7; i < 12; i++) {
+    // Radian toggle
+    if (e.getSource() == functionButtons[3]) {
+      if (radians == false) {
+        radians = true;
+        functionButtons[3].setText("DEG");
+      } else {
+        radians = false;
+        functionButtons[3].setText("RAD");
+      }
+    }
+
+    // Basic functions (+, -, *, /)
+    for (int i = 7; i < 11; i++) {
       if (e.getSource() == functionButtons[i]) {
         if (nums.size() != operations.size()) {
           String appendText = functionLabels[i];
           operations.add(appendText);
         }
+      }
+    }
+
+    // 2nd
+    if (e.getSource() == functionButtons[15]) {
+      if (second == true) {
+        second = false;
+        functionButtons[0].setText("SIN");
+        functionButtons[1].setText("COS");
+        functionButtons[2].setText("TAN");
+        functionButtons[4].setText("SQRT");
+        functionButtons[5].setText("LOG");
+        functionButtons[6].setText("LN");
+        functionButtons[14].setText("(");
+
+      } else {
+        second = true;
+        functionButtons[0].setText("SIN^-1");
+        functionButtons[1].setText("COS^-1");
+        functionButtons[2].setText("TAN^-1");
+        functionButtons[4].setText("^");
+        functionButtons[5].setText("10^");
+        functionButtons[6].setText("e^");
+        functionButtons[14].setText(")");
+      }
+    }
+
+    // CLR
+    if (e.getSource() == functionButtons[17]) {
+      while (nums.size() > 0) {
+        nums.remove();
+      }
+      while (operations.size() > 0) {
+        operations.remove();
       }
     }
 
