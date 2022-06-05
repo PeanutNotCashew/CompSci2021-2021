@@ -21,12 +21,12 @@ public class Calculator implements ActionListener {
     frame = new JFrame("Calculator");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setTitle("Calculator");
-    frame.setSize(420, 550);
+    frame.setSize(470, 550);
     frame.setLayout(null);
 
     //create textfield
     textField = new JTextField();
-    textField.setBounds(50, 25, 300, 50);
+    textField.setBounds(50, 25, 350, 50);
     textField.setEditable(false);
 
     //create numbers
@@ -49,7 +49,7 @@ public class Calculator implements ActionListener {
 
     //create panel for buttons
     panel = new JPanel();
-    panel.setBounds(50, 100, 300, 400);
+    panel.setBounds(50, 100, 350, 400);
     panel.setLayout(new GridLayout(8, 4, 10, 10));
 
     //add buttons
@@ -88,7 +88,7 @@ public class Calculator implements ActionListener {
     frame.setVisible(true);
   }
 
-  public void actionPerformed(ActionEvent e){
+  public void actionPerformed(ActionEvent e) {
     // Number buttons (0-9)
     for (int i = 0; i < 10; i++) {
       if (e.getSource() == numberButtons[i]) {
@@ -124,6 +124,31 @@ public class Calculator implements ActionListener {
       }
     }
 
+    // Period
+    if (e.getSource() == functionButtons[11]) {
+      if (nums.size() != operations.size()) {
+        int j = nums.size() - 1;
+        String appendText = nums.get(j).concat(".");
+        nums.set(j, appendText);
+      } else {
+        nums.add("0.");
+      }
+    }
+
+    // Negative
+    if (e.getSource() == functionButtons[12]) {
+      if (nums.size() == operations.size()) {
+        nums.add("-");
+      }
+    }
+
+    // Equals
+    if (e.getSource() == functionButtons[13]) {
+      evaluate(0, operations.size());
+    }
+
+    // Parenthesis
+
     // 2nd
     if (e.getSource() == functionButtons[15]) {
       if (second == true) {
@@ -148,6 +173,8 @@ public class Calculator implements ActionListener {
       }
     }
 
+    // DEL
+
     // CLR
     if (e.getSource() == functionButtons[17]) {
       while (nums.size() > 0) {
@@ -160,5 +187,107 @@ public class Calculator implements ActionListener {
 
     System.out.print(nums);
     System.out.println(operations);
+    print();
   }
+
+  public void evaluate(int start, int end) {
+    int i;
+
+    //eval multiplication & division
+    i = 0;
+    while (i != -1) {
+      i = linearSearch("*", start, end);
+      int placeholder = linearSearch("/", start, end);
+      boolean divide = false;
+      float output;
+
+      //decides whether multiplication of division occurs 1st
+      if (((i > placeholder) && (placeholder != -1)) | (i == -1)) {
+        i = placeholder;
+        divide = true;
+      }
+
+      //carries out operations and deletes xtra array spaces
+      if (i != -1) {
+        float num1 = Float.valueOf(nums.get(i));
+        float num2 = Float.valueOf(nums.get(i + 1));
+
+        if (divide == false) {
+          output = num1 * num2;
+        } else {
+          output = num1 / num2;
+        }
+
+        nums.set(i, String.valueOf(output));
+        nums.remove(i + 1);
+        operations.remove(i);
+        end--;
+      }
+    }
+
+    //eval addition & subtraction
+    i = 0;
+    while (i != -1) {
+      i = linearSearch("+", start, end);
+      int placeholder = linearSearch("-", start, end);
+      boolean subtract = false;
+      float output;
+
+      if (((i > placeholder) && (placeholder != -1)) | (i == -1)) {
+        i = placeholder;
+        subtract = true;
+      }
+
+      if (i != -1) {
+        float num1 = Float.valueOf(nums.get(i));
+        float num2 = Float.valueOf(nums.get(i + 1));
+
+        if (subtract == false) {
+          output = num1 + num2;
+        } else {
+          output = num1 - num2;
+        }
+
+        nums.set(i, String.valueOf(output));
+        nums.remove(i + 1);
+        operations.remove(i);
+        end--;
+      }
+    }
+  }
+
+  public void print() {
+    String equation = "";
+    for (int i = 0; i < nums.size(); i++) {
+      String appendText = equation.concat(nums.get(i));
+      equation = appendText;
+      try {
+        appendText = equation.concat(operations.get(i));
+        equation = appendText;
+      } catch (Exception e) {
+        // nothing here
+      }
+    }
+    textField.setText(equation);
+  }
+
+
+  public int linearSearch(String toFind, int start, int end){
+    for (int i = start; i < end; i++) {
+      if (toFind.compareToIgnoreCase(operations.get(i)) == 0) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  public int getEndParen(int start, int end){
+    for (int i = start; i < end; i++) {
+      if (")" == nums.get(i)) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
 }
