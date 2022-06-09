@@ -600,5 +600,4 @@ public class Calculator implements ActionListener {
     }
     return -1;
   }
-
 }
