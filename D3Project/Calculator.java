@@ -124,6 +124,47 @@ public class Calculator implements ActionListener {
       }
     }
 
+    // Advanced functions
+    for (int i = 0; i < 3; i++) {
+      if (e.getSource() == functionButtons[i]) {
+        String appendText = functionButtons[i].getText();
+        if (nums.size() != operations.size()) {
+          operations.add("*");
+          nums.add("n/a");
+          operations.add(appendText);
+          nums.add("(");
+          operations.add("n/a");
+        } else {
+          nums.add("n/a");
+          operations.add(appendText);
+          nums.add("(");
+          operations.add("n/a");
+        }
+      }
+    }
+
+    for (int i = 4; i < 7; i++) {
+      if (e.getSource() == functionButtons[i]) {
+        String appendText = functionButtons[i].getText();
+        if (nums.size() != operations.size()) {
+          if ((second != true) | (i != 4)) {
+            operations.add("*");
+            nums.add("n/a");
+          }
+          operations.add(appendText);
+          nums.add("(");
+          operations.add("n/a");
+        } else {
+          if ((second != true) | (i != 4)) {
+            nums.add("n/a");
+            operations.add(appendText);
+            nums.add("(");
+            operations.add("n/a");
+          }
+        }
+      }
+    }
+
     // Period
     if (e.getSource() == functionButtons[11]) {
       if (nums.size() != operations.size()) {
@@ -144,12 +185,52 @@ public class Calculator implements ActionListener {
 
     // Equals
     if (e.getSource() == functionButtons[13]) {
-      evaluate(0, operations.size());
+      boolean evaluateable;
+      String output = "0";
+
+      if (nums.size() != operations.size()) {
+        try {
+          evaluateable = evaluate(0, operations.size());
+        } catch(Exception f) {
+          evaluateable = false;
+        }
+      } else {
+        evaluateable = false;
+      }
+
+      if (evaluateable == true) {
+        output = nums.get(0);
+      } else {
+        output = "ERROR";
+      }
+      textField.setText(output);
+
+      while (nums.size() > 0) {
+        nums.remove();
+      }
+      while (operations.size() > 0) {
+        operations.remove();
+      }
+
     }
 
     // Parenthesis
+    if (e.getSource() == functionButtons[14]) {
+      if (second == false) {
+        if (nums.size() != operations.size()) {
+          operations.add("n/a");
+          nums.add(")");
+        }
+      } else {
+        if ((nums.size() != operations.size()) && (nums.size() != 0)) {
+          operations.add("*");
+        }
+        nums.add("(");
+        operations.add("n/a");
+      }
+    }
 
-    // 2nd
+    // 2ND
     if (e.getSource() == functionButtons[15]) {
       if (second == true) {
         second = false;
@@ -159,7 +240,7 @@ public class Calculator implements ActionListener {
         functionButtons[4].setText("SQRT");
         functionButtons[5].setText("LOG");
         functionButtons[6].setText("LN");
-        functionButtons[14].setText("(");
+        functionButtons[14].setText(")");
 
       } else {
         second = true;
@@ -169,11 +250,28 @@ public class Calculator implements ActionListener {
         functionButtons[4].setText("^");
         functionButtons[5].setText("10^");
         functionButtons[6].setText("e^");
-        functionButtons[14].setText(")");
+        functionButtons[14].setText("(");
       }
     }
 
     // DEL
+    if (e.getSource() == functionButtons[16]) {
+      int place = nums.size() - 1;
+
+      if (nums.size() == 0) {
+        //do nothing
+      } else if (nums.size() != operations.size()) {
+        String initialStr = nums.get(place);
+        String output = initialStr.substring(0, initialStr.length() - 1);
+        if (output == "") {
+          nums.remove(place);
+        } else {
+          nums.set(place, output);
+        }
+      } else {
+        operations.remove(place);
+      }
+    }
 
     // CLR
     if (e.getSource() == functionButtons[17]) {
@@ -187,11 +285,167 @@ public class Calculator implements ActionListener {
 
     System.out.print(nums);
     System.out.println(operations);
-    print();
+
+    if (e.getSource() != functionButtons[13]) {
+      print();
+    }
   }
 
-  public void evaluate(int start, int end) {
+  public boolean evaluate(int start, int end) {
     int i;
+
+    //eval paren
+    i = 0;
+    while (i != -1) {
+      i = getEndParen(start, end);
+      if (i != -1) {
+        int j = getStartParen(i);
+        if (j != -1) {
+          evaluate(j + 1, i - 1);
+
+          // delete xtra parens
+          operations.remove(j);
+          operations.remove(j);
+          nums.remove(j);
+          nums.remove(j + 1);
+          end = nums.size() - 1;
+
+          // eval for special functions
+          double input;
+          String output;
+          switch (operations.get(j - 1)) {
+            case "SIN":
+              if (radians == true) {
+                input = Double.valueOf(nums.get(j));
+              } else {
+                input = Math.toRadians(Double.valueOf(nums.get(j)));
+              }
+              output = String.valueOf(Math.sin(input));
+              nums.set(j - 1, output);
+              operations.remove(j - 1);
+              nums.remove(j);
+              end --;
+              break;
+            case "COS":
+              if (radians == true) {
+                input = Double.valueOf(nums.get(j));
+              } else {
+                input = Math.toRadians(Double.valueOf(nums.get(j)));
+              }
+              output = String.valueOf(Math.cos(input));
+              nums.set(j - 1, output);
+              operations.remove(j - 1);
+              nums.remove(j);
+              end --;
+              break;
+            case "TAN":
+              if (radians == true) {
+                input = Double.valueOf(nums.get(j));
+              } else {
+                input = Math.toRadians(Double.valueOf(nums.get(j)));
+              }
+              output = String.valueOf(Math.tan(input));
+              nums.set(j - 1, output);
+              operations.remove(j - 1);
+              nums.remove(j);
+              end --;
+              break;
+            case "SQRT":
+              input = Double.valueOf(nums.get(j));
+              output = String.valueOf(Math.sqrt(input));
+              nums.set(j - 1, output);
+              operations.remove(j - 1);
+              nums.remove(j);
+              end --;
+              break;
+            case "LOG":
+              input = Double.valueOf(nums.get(j));
+              output = String.valueOf(Math.log10(input));
+              nums.set(j - 1, output);
+              operations.remove(j - 1);
+              nums.remove(j);
+              end --;
+              break;
+            case "LN":
+              input = Double.valueOf(nums.get(j));
+              output = String.valueOf(Math.log(input));
+              nums.set(j - 1, output);
+              operations.remove(j - 1);
+              nums.remove(j);
+              end --;
+              break;
+            case "SIN^-1":
+              if (radians == true) {
+                input = Double.valueOf(nums.get(j));
+              } else {
+                input = Math.toRadians(Double.valueOf(nums.get(j)));
+              }
+              output = String.valueOf(Math.asin(input));
+              nums.set(j - 1, output);
+              operations.remove(j - 1);
+              nums.remove(j);
+              end --;
+              break;
+            case "COS^-1":
+              if (radians == true) {
+                input = Double.valueOf(nums.get(j));
+              } else {
+                input = Math.toRadians(Double.valueOf(nums.get(j)));
+              }
+              output = String.valueOf(Math.acos(input));
+              nums.set(j - 1, output);
+              operations.remove(j - 1);
+              nums.remove(j);
+              end --;
+              break;
+            case "TAN^-1":
+              if (radians == true) {
+                input = Double.valueOf(nums.get(j));
+              } else {
+                input = Math.toRadians(Double.valueOf(nums.get(j)));
+              }
+              output = String.valueOf(Math.atan(input));
+              nums.set(j - 1, output);
+              operations.remove(j - 1);
+              nums.remove(j);
+              end --;
+              break;
+            case "^":
+              input = Double.valueOf(nums.get(j));
+              Double inputTwo = Double.valueOf(nums.get(j-1));
+              output = String.valueOf(Math.pow(inputTwo, input));
+              nums.set(j - 1, output);
+              operations.remove(j - 1);
+              nums.remove(j);
+              end --;
+              break;
+            case "10^":
+              input = Double.valueOf(nums.get(j));
+              output = String.valueOf(Math.pow(10, input));
+              nums.set(j - 1, output);
+              operations.remove(j - 1);
+              nums.remove(j);
+              end --;
+              break;
+            case "e^":
+              input = Double.valueOf(nums.get(j));
+              output = String.valueOf(Math.exp(input));
+              nums.set(j - 1, output);
+              operations.remove(j - 1);
+              nums.remove(j);
+              end --;
+              break;
+          }
+
+        } else {
+          return false;
+        }
+      }
+
+      if ((i == -1) && (getStartParen(end) != -1)) {
+        return false;
+      }
+    }
 
     //eval multiplication & division
     i = 0;
@@ -254,23 +508,31 @@ public class Calculator implements ActionListener {
         end--;
       }
     }
+
+    return true;
   }
 
   public void print() {
     String equation = "";
     for (int i = 0; i < nums.size(); i++) {
-      String appendText = equation.concat(nums.get(i));
-      equation = appendText;
-      try {
-        appendText = equation.concat(operations.get(i));
+      String appendText;
+
+      if (nums.get(i) != "n/a") {
+        appendText = equation.concat(nums.get(i));
         equation = appendText;
+      }
+
+      try {
+        if (operations.get(i) != "n/a") {
+          appendText = equation.concat(operations.get(i));
+          equation = appendText;
+        }
       } catch (Exception e) {
         // nothing here
       }
     }
     textField.setText(equation);
   }
-
 
   public int linearSearch(String toFind, int start, int end){
     for (int i = start; i < end; i++) {
@@ -282,10 +544,23 @@ public class Calculator implements ActionListener {
   }
 
   public int getEndParen(int start, int end){
-    for (int i = start; i < end; i++) {
+    String paren = ")";
+    for (int i = start; i <= end; i++) {
       if (")" == nums.get(i)) {
         return i;
       }
+    }
+    return -1;
+  }
+
+  public int getStartParen(int end){
+    int i = end;
+    String paren = "(";
+    while (i > -1) {
+      if (paren.equals(nums.get(i))) {
+        return i;
+      }
+      i--;
     }
     return -1;
   }
