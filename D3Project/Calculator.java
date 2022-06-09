@@ -2,8 +2,21 @@ import java.util.LinkedList;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.border.Border;
+
 
 public class Calculator implements ActionListener {
+  // Aesthetic variables
+  Color black = new Color(34, 35, 36);
+  Color darkgray = new Color(51, 52, 54);
+  Color darkblue = new Color(34, 44, 85);
+  Color white = new Color(232, 231, 227);
+  Color green = new Color(116, 150, 98);
+  Font buttonFont = new Font("Arial", Font.PLAIN, 15);
+  Font textFieldFont = new Font("Arial", Font.PLAIN, 20);
+  Border b = BorderFactory.createLineBorder(black);
+
+  // GUI variables
   JFrame frame;
   JPanel panel;
   JTextField textField;
@@ -11,6 +24,7 @@ public class Calculator implements ActionListener {
   JButton[] functionButtons = new JButton[18];
   String[] functionLabels = {"SIN", "COS", "TAN", "RAD", "SQRT", "LOG", "LN", "/", "*", "-", "+", ".", "(-)", "=", ")", "2ND", "DEL", "CLR"};
 
+  // Functionality variables
   LinkedList<String> nums = new LinkedList<String>();
   LinkedList<String> operations = new LinkedList<String>();
   boolean second = false;
@@ -23,11 +37,15 @@ public class Calculator implements ActionListener {
     frame.setTitle("Calculator");
     frame.setSize(470, 550);
     frame.setLayout(null);
+    frame.getContentPane().setBackground(black);
 
     //create textfield
     textField = new JTextField();
     textField.setBounds(50, 25, 350, 50);
     textField.setEditable(false);
+    textField.setBackground(green);
+    textField.setFont(textFieldFont);
+    textField.setBorder(b);
 
     //create numbers
     for (int i = 0; i < 10; i++) {
@@ -38,6 +56,9 @@ public class Calculator implements ActionListener {
       }
       numberButtons[i].addActionListener(this);
       numberButtons[i].setFocusable(false);
+      numberButtons[i].setBackground(white);
+      numberButtons[i].setFont(buttonFont);
+      numberButtons[i].setBorder(b);
     }
 
     //create functions
@@ -45,12 +66,25 @@ public class Calculator implements ActionListener {
       functionButtons[i] = new JButton(functionLabels[i]);
       functionButtons[i].addActionListener(this);
       functionButtons[i].setFocusable(false);
+      functionButtons[i].setFont(buttonFont);
+      functionButtons[i].setBorder(b);
+
+      if ((i < 7) | (i > 13)) {
+        functionButtons[i].setBackground(darkgray);
+        functionButtons[i].setForeground(white);
+      } else if ((i < 11) | (i == 13)) {
+        functionButtons[i].setBackground(darkblue);
+        functionButtons[i].setForeground(white);
+      } else if (i < 13) {
+        functionButtons[i].setBackground(white);
+      }
     }
 
     //create panel for buttons
     panel = new JPanel();
     panel.setBounds(50, 100, 350, 400);
     panel.setLayout(new GridLayout(8, 4, 10, 10));
+    panel.setBackground(black);
 
     //add buttons
     panel.add(functionButtons[0]);
@@ -283,12 +317,14 @@ public class Calculator implements ActionListener {
       }
     }
 
-    System.out.print(nums);
-    System.out.println(operations);
-
     if (e.getSource() != functionButtons[13]) {
       print();
     }
+
+    /* For testing bugs:
+    System.out.print(nums);
+    System.out.println(operations);
+    */
   }
 
   public boolean evaluate(int start, int end) {
